@@ -1,0 +1,38 @@
+---
+layout: page
+title: Home
+---
+{% include JB/setup %}
+
+<div class="posts" itemscope="" itemtype="http://schema.org/Blog">
+<!-- This loops through the paginated posts -->
+{% for post in paginator.posts %}
+  <article class="post" itemprop="blogPost" itemscope="" itemtype="http://schema.org/BlogPosting">
+      <h2><a href="{{ post.url }}" itemprop="url"><span itemprop="name">{{ post.title }}</span></a></h2>
+      <meta itemprop="keywords" content="{{ post.tags | join: ',' }}" />
+  <div class="content" itemprop="description">
+		{% if post.content contains '<!--more-->' %}
+            {{ post.content | split:'<!--more-->' | first }}
+        <p><a href="{{ post.url }}" itemprop="url">Read more..</a></p>
+        {% else %}
+	        {{ post.content | strip_html | truncatewords: 100 }}
+        {% endif %}
+      </div>
+    </article>
+{% endfor %}
+</div>
+
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+  {% else %}
+    <span class="previous">Previous</span>
+  {% endif %}
+  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+  {% else %}
+    <span class="next ">Next</span>
+  {% endif %}
+</div>

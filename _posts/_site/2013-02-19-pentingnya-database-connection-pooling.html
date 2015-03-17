@@ -1,0 +1,32 @@
+<p>Beberapa saat lalu saya memikirkan betapa pentingnya resource pada server database, dulu sewaktu saya duduk dibangku kuliah pada saat mengerjakan project/tugas belum terlalu memikirkan hal tersebut.  Jika aplikasi kita tergantung pada database otomatis kita harus selalu terkoneksi ke database, entah untuk query select, insert, update atau delete.<br />
+Connection Pooling adalah suatu metode untuk menjaga supaya koneksi database terbuka sehingga dapat digunakan kembali, karena membuka koneksi ke database adalah proses yang "Mahal", jadi pooling menjaga koneksi tetap aktif.<!--more--><a class="thumbnail" href="http://www.jefri-p.com/wp-content/uploads/2013/02/Database_connection_pooling.jpg"><img class="aligncenter size-full wp-image-244" alt="Database_connection_pooling" src="assets/Database_connection_pooling.jpg" width="340" height="125" /></a></p>
+<p>Keuntungan Connection Pooling :<br />
+- Mempercepat response time (pada saat membuka koneksi)<br />
+- Penggunaan kembali resource database<br />
+- Penggunaan memory lebih hemat</p>
+<p>Connection Pooling biasanya populer di kalangan pengguna Java (Application Server), banyak library yang tersedia untuk dapat menggunakan fitur ini, contohnya :<br />
+- <a href="http://commons.apache.org/dbcp/" target="_blank">Commons Database Connection Pooling (Commons DBCP)</a><br />
+- <a href="http://www.mchange.com/projects/c3p0" target="_blank">C3P0 - JDBC3 Connection and Statement Pooling</a><br />
+- <a href="http://jolbox.com/" target="_blank">BoneCP</a><br />
+Saya sangat tertatik dengan BoneCP, dikarenakan pada website <a href="http://jolbox.com/dynamic-benchmark.html" target="_blank">http://jolbox.com/dynamic-benchmark.html</a> disertakan benchmark dengan beberapa Database Connection Pooling seperti diatas, dan hasilnya WOW. Jika sempat saya akan membuat aplikasi kecil menggunakan <a href="http://www.playframework.com/" target="_blank">PlayFramework!</a> dengan Database Connection Pooling menggunakan library diatas.</p>
+<p>Saya adalah seorang penggemar programming PHP, namun sayang sekali PHP tidak mendukung untuk Pooling Connection, PHP hanya mendukung Persistent Connection.</p>
+<blockquote><p>Persistent Connection != Connection Pooling.</p></blockquote>
+<p>Saat saya sedang mencari, ternyata Oracle mendukung Pooling untuk PHP dengan nama <a title="About Database Resident Connection Pooling" href="http://docs.oracle.com/cd/B28359_01/server.111/b28310/manproc002.htm" target="_blank">Database Resident Connection Pooling</a>. Di website tersebut ditulis :</p>
+<blockquote><p>DRCP complements middle-tier connection pools that share connections between threads in a middle-tier process. In addition, DRCP enables sharing of database connections across middle-tier processes on the same middle-tier host and even across middle-tier hosts. This results in significant reduction in key database resources needed to support a large number of client connections, thereby reducing the database tier memory footprint and boosting the scalability of both middle-tier and database tiers. Having a pool of readily available servers also has the additional benefit of reducing the cost of creating and tearing down client connections.<br />
+<strong>DRCP is especially relevant for architectures with multi-process single threaded application servers (such as PHP/Apache) that cannot perform middle-tier connection pooling. </strong>The database can still scale to tens of thousands of simultaneous connections with DRCP.</p></blockquote>
+<p>Yup DRCP memberikan solusi Pooling bagi PHPers :D<br />
+Berikut sedikit perbandingan jika menggunakan DRCP dibanding dengan Dedicated Server dan Shared server dari situs tersebut :<br />
+Dedicated Server<br />
+Memory used = 5000 X (400 KB + 4 MB) = 22 GB</p>
+<p>Shared Server<br />
+Memory used = 5000 X 400 KB + 100 X 4 MB = 2.5 GB<br />
+Out of the 2.5 GB, 2 GB is allocated from the SGA.</p>
+<p>Database Resident Connection Pooling<br />
+Memory used = 100 X (400 KB + 4 MB) + (5000 X 35KB)= 615 MB</p>
+<p>Sungguh Sangat jauh bukan?ya itu merupakan sedikit dari salah satu Keuntungan Database Connection Pooling.</p>
+<p><strong>CMIIW</strong> :)</p>
+<p>Bacaan :<br />
+<a href="http://stackoverflow.com/questions/4041114/what-is-database-pooling" target="_blank">http://stackoverflow.com/questions/4041114/what-is-database-pooling</a><br />
+<a href="http://docs.oracle.com/cd/E17781_01/appdev.112/e18555/ch_two.htm#BABHHEDD" target="_blank">http://docs.oracle.com/cd/E17781_01/appdev.112/e18555/ch_two.htm#BABHHEDD</a><br />
+<a href="http://docs.oracle.com/cd/B28359_01/server.111/b28310/manproc002.htm" target="_blank">http://docs.oracle.com/cd/B28359_01/server.111/b28310/manproc002.htm</a><br />
+<a href="http://pic.dhe.ibm.com/infocenter/wasinfo/v6r0/index.jsp?topic=%2Fcom.ibm.websphere.base.doc%2Finfo%2Faes%2Fae%2Fcdat_conpool.html" target="_blank">http://pic.dhe.ibm.com/infocenter/wasinfo/v6r0/index.jsp?topic=%2Fcom.ibm.websphere.base.doc%2Finfo%2Faes%2Fae%2Fcdat_conpool.html</a></p>

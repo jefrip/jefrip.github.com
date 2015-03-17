@@ -1,0 +1,50 @@
+<p><a title="kohana framework" href="http://kohanaframework.org/" target="_blank">Kohana 3</a> adalah framework elegan PHP5 yang menggunakan pola arsitektur Hierarchical Model View Controller (HMVC)  yang kaya akan komponen untuk membangun aplikasi web.  Ada beberapa alasan mengapa Anda harus memilih Kohana sebagai PHP framework tetapi yang utama adalah keamanan, ringan dan mudah digunakan.<br />
+<!--more--><a href="http://www.jefri-p.com/wp-content/uploads/2012/04/logo-new.png"><img class="size-full wp-image-80 alignleft" title="kohana 3" alt="kohana 3" src="assets/logo-new.png" width="200" height="70" /></a></p>
+<p>&nbsp;</p>
+<p><strong>Dasar HMVC</strong></p>
+<p>Cara mudah untuk berpikir HMVC adalah memikirkan AJAX tanpa tambahan pemanggilan server. Misalnya, jika Anda memiliki tindakan untuk AJAX yang menampilkan daftar pengguna, Anda dapat menggunakan kembali tindakan yang di controller lain, daripada menduplikasi metode ini.</p>
+<p>Salah satu fitur yang paling powerful di Kohana 3 adalah kemampuan untuk memanggil permintaan lain setiap saat selama request flow. Pendekatan MVC berlapis memungkinkan Anda untuk merakit sebuah klien kompleks tier dan benar-benar memanfaatkan keuntungan objek oriented.</p>
+<p><strong>Cascading Filesystem</strong></p>
+<p>Filesystem Kohana adalah hirarki untuk struktur direktori sama yang cascade. Hirarki di Kohana (digunakan bila file dimuat oleh Kohana ::find_file) adalah dengan urutan sebagai berikut.:</p>
+<p>Arsitektur Berlapis<br />
+- Mengurangi ketergantungan antara bagian yang berbeda dari program<br />
+- Mendorong reusable kode, komponen dan modul<br />
+- Meningkatkan extensibility dan mengurangi maintenance<br />
+- Beberapa digunakan untuk desain HMVC dalam arsitektur client-tier<br />
+- Antarmuka elemen atau widget Modular<br />
+- Aplikasi dan Kontrol Menu<br />
+- Interaksi Server<br />
+- Reusable Application Flows</p>
+<p>File yang berada di direktori yang lebih tinggi urutan lokasi include didahulukan atas file dengan nama yang sama di bawahnya urutan, dimana memungkinkan untuk overload file apa saja dengan menempatkan sebuah file dengan nama yang sama di direktori "lebih tinggi".</p>
+<p style="text-align: center;"><a href="http://www.jefri-p.com/wp-content/uploads/2012/04/cascading_filesystem.png"><img class="aligncenter  wp-image-85" title="cascading filesystem" alt="cascading filesystem" src="assets/cascading_filesystem.png" width="536" height="720" /></a></p>
+<p style="text-align: left;">Path modules<br />
+Hal ini ditetapkan sebagai associative array menggunakan Kohana::modules di APPPATH / bootstrap.php. Setiap nilai dari array akan dicaridalam urutan bahwa modules sudah didefinisikan.</p>
+<p>Path system<br />
+Didefinisikan sebagai SYSPATH di index.php. Nilai default adalah system. Semua file "inti" utama atau kelas didefinisikan di sini.</p>
+<p>Path application<br />
+Merupakan tempat pengembangan aplikasi  yang di dalamnya akan terdapat berbagai macam direktori yang berhubungan dengan aplikasi kita termasuk folder cache dan log. Classes adalah tempat di mana kita bisa melakukan overriding terhadap class yang berasal dari core system dan modules, juga sebagai tempat untuk meletakkan Controller serta Model. Views untuk meletakkan view yang akan dipanggil pada Controller.</p>
+<p><strong>Instalasi Kohana Framework</strong></p>
+<p>- Terlebih dahulu download  <a title="kohana framework" href="http://kohanaframework.org" target="_blank">kohana 3</a> melalui <a href="http://kohanaframework.org/download">http://kohanaframework.org/download</a> ataupun dapat melalui github <a href="https://github.com/kohana/kohana">https://github.com/kohana/kohana</a> (dalam hal ini adalah kohana 3.2)</p>
+<p>- unzip kohana-3.2.0.zip</p>
+<p>- Ubah nama folder kohana-3.2-master-1 menjadi kohana dan masukkan kedalam docroot dari webserver Anda</p>
+<p>- Buat folder bernama cache dan logs di dalam folder application dan chmod 666</p>
+<p>- Buka browser Anda dan arahkan ke url http://localhost/kohana maka akan memanggil skrip install.php dan memeriksa persyaratan server Anda.</p>
+<p>Kohana dapat berjalan di hampir semua environment, dengan minimum persyaratan :</p>
+<p>- Apache server</p>
+<p>- PHP versi &gt;= 5.2.3</p>
+<p>Anda dapat menginstall <a title="XAMPP" href="http://www.apachefriends.org/en/xampp.html" target="_blank">XAMPP</a> ataupun <a title="WAMP" href="http://www.wampserver.com/en/" target="_blank">WAMP</a> sebagai web server dan database server (Apache, PHP, MySql Server)</p>
+<p>- Setting pada bootstrap.php jika kohana ada berada dalam subdirectory.</p>
+<p>Pada line 82, ubah menjadi</p>
+<p>Kohana::init(array(<br />
+'base_url' =&gt; '/kohana',<br />
+));</p>
+<p>Jika berhasil maka akan muncul tampilan seperti berikut :</p>
+<p><a href="http://www.jefri-p.com/wp-content/uploads/2012/04/kohana-install.jpg"><img class="aligncenter size-full wp-image-90" title="kohana install" alt="kohana install" src="assets/kohana-install.jpg" width="509" height="754" /></a></p>
+<p>Jika sudah berhasil dalam pengecekan kebutuhan dari kohana, lalu hapus file install.php, maka akan muncul seperti ini :</p>
+<p>hello, world!</p>
+<p>Yup, Anda berhasil melakukan instalasi kohana 3, it's easy isn't it? sekarang Anda dapat membuat project menggunakan framework kohana.</p>
+<p>Tutorial berikutnya akan mempelajari lebih dalam tentang kohana 3 berikut dengan contohnya.</p>
+<p>Bersambung ....</p>
+<p>Bahan bacaan :</p>
+<p><a href="http://kohanaframework.org/3.2/guide/">http://kohanaframework.org/</a></p>
+<p><a href="http://kerkness.ca/kowiki/doku.php">http://kerkness.ca/kowiki/doku.php</a></p>

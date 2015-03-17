@@ -1,0 +1,301 @@
+---
+layout: post
+title: Belajar MyBatis 3
+date: 2011-11-21 09:31:11.000000000 +07:00
+categories:
+- Java
+- MyBatis
+tags:
+- java
+- jdbc
+- mybatis
+- persistence-framework
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _yoast_wpseo_focuskw: Java, MyBatis, MyBatis Annotation
+  _yoast_wpseo_metadesc: Java, Belajar MyBatis, MyBatis Annotation
+  _syntaxhighlighter_encoded: '1'
+  dsq_thread_id: '479046459'
+  slider_post_image: http://www.jefri-p.com/wp-content/uploads/2011/11/ibatis_mybatis1.png
+  _yoast_wpseo_linkdex: '60'
+  _thumbnail_id: '16'
+author:
+  login: admin
+  email: jefri.p@gmail.com
+  display_name: Jefri
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Setelah sekian lama akhirnya saya bisa menuliskan blog lagi, yups di web saya sendiri <a href="http://www.jefri-p.com">jefri-p.com</a>, semester ini saya mendapat banyak matakuliah yang mempunyai banyak tugas akhir, salah satunya adalah PSBO (Pemrograman Sistem Berorientasi Objek) dan tugas akhirnya apalagi kalau bukan membuat sistem yang berorientasi objek, saya memilih <a title="Java" href="http://id.wikipedia.org/wiki/Java" target="_blank">Java</a> sebagai bahasa pemrogramannya walaupun saya belum terlalu mahir <a title="topik java" href="http://www.jefri-p.com/topik/java" target="_blank">java</a>. Demi memudahkan project tersebut saya memilih <a title="MyBatis website" href="http://www.mybatis.org/" target="_blank">MyBatis Framework</a> (yang dulunya <a title="iBatis website" href="http://ibatis.apache.org/" target="_blank">iBatis</a>).</p>
+<p><!--more--></p>
+<p><a href="/assets/ibatis_mybatis.png"><img class="size-full wp-image-16" title="ibatis_mybatis" alt="ibatis mybatis framework" src="/assets/ibatis_mybatis.png" width="274" height="149" /></a> ibatis mybatis</p>
+<p><strong>Apakah MyBatis itu?</strong></p>
+<p>MyBatis Framework adalah Data Mapper framework yang membuat kita lebih mudah menggunakan database relational dengan aplikasi berorientasi objek.</p>
+<blockquote><p>The MyBatis data mapper framework makes it easier to use a relational database with object-oriented applications. MyBatis couples objects with stored procedures or SQL statements using a XML descriptor. Simplicity is the biggest advantage of the MyBatis data mapper over object relational mapping tools.</p>
+<p>To use the MyBatis data mapper, you rely on your own objects, XML, and SQL. There is little to learn that you don’t already know. With the MyBatis Data Mapper, you have the full power of both SQL and stored procedures at your fingertips.</p>
+<p>(<a href="http://www.mybatis.org">www.mybatis.org</a>)</p></blockquote>
+<p style="text-align: center;"><img class="aligncenter size-full wp-image-15" title="flow-mybatis" alt="flow mybatis" src="/assets/flow-mybatis.png" width="504" height="432" /></p>
+<p style="text-align: left;">Tanpa banyak basa-basi mari kita pelajari contoh pertama menggunakan <a href="http://www.jefri-p.com/topik/mybatis">MyBatis</a></p>
+<p><strong>Pre-Requisites</strong></p>
+<p>Saya menggunakan:</p>
+<p>IDE: <a href="http://eclipse.org/">Eclipse</a> (atau bisa yang lain)</p>
+<p>DataBase: <a href="http://dev.mysql.com/downloads/">MySQL</a></p>
+<p>Libs/jars: <a href="http://www.mybatis.org/">Mybatis</a>, <a href="http://dev.mysql.com/downloads/connector/j/">MySQL conector</a></p>
+<p>pertama kita buat database java, dan tabel contact (dalam hal ini menggunakan MySQL)</p>
+<p><strong>Sample Database</strong></p>
+<p>DROP TABLE IF EXISTS `contact`;<br />
+CREATE TABLE `contact` (<br />
+`id` int(15) NOT NULL AUTO_INCREMENT,<br />
+`namalengkap` varchar(50) DEFAULT NULL,<br />
+`phone` varchar(20) DEFAULT NULL,<br />
+`email` varchar(50) DEFAULT NULL,<br />
+PRIMARY KEY (`id`)<br />
+);<br />
+INSERT INTO contact (id, namalengkap, phone, email) VALUES ( 1,'Jefri Pakpahan','1245123','email@jefri-p.com');<br />
+INSERT INTO contact (id, namalengkap, phone, email) VALUES ( 2,'Jefri Pakpahan','1245123','email@jefri-p.com');<br />
+INSERT INTO contact (id, namalengkap, phone, email) VALUES ( 3,'Jefri Pakpahan','1245123','email@jefri-p.com');<br />
+INSERT INTO contact (id, namalengkap, phone, email) VALUES ( 4,'Jefri Pakpahan','1245123','email@jefri-p.com');</p>
+<p><strong>1. Contact Beans / POJO</strong></p>
+<p>[java]<br />
+package org.mycontact.example.beans;<br />
+public class Contact {<br />
+	Integer id;<br />
+	String namalengkap;<br />
+	String phone;<br />
+	String email;</p>
+<p>	public Integer getId() {<br />
+		return id;<br />
+	}</p>
+<p>	public void setId(Integer id) {<br />
+		this.id = id;<br />
+	}</p>
+<p>	public String getNamaLengkap() {<br />
+		return namalengkap;<br />
+	}</p>
+<p>	public void setNamaLengkap(String namalengkap) {<br />
+		this.namalengkap = namalengkap;<br />
+	}</p>
+<p>	public String getPhone() {<br />
+		return phone;<br />
+	}</p>
+<p>	public void setPhone(String phone) {<br />
+		this.phone = phone;<br />
+	}</p>
+<p>	public String getEmail() {<br />
+		return email;<br />
+	}</p>
+<p>	public void setEmail(String email) {<br />
+		this.email = email;<br />
+	}<br />
+}[/java]</p>
+<p><strong>2. ContactMapper.xml</strong></p>
+<p>Berikut adalah ContactMapper.xml</p>
+<p>[xml]<br />
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</p>
+<p>		insert<br />
+		into contact (<br />
+		namalengkap, phone, email<br />
+		) values (<br />
+		#{namalengkap}, #{phone}, #{email}<br />
+		)</p>
+<p>		update contact set<br />
+		namalengkap = #{namalengkap},<br />
+		phone = #{phone},<br />
+		email = #{email}<br />
+		where id = #{id}</p>
+<p>		delete from contact<br />
+		where id = #{value}</p>
+<p>&lt;select&gt; select * from contact&lt;/select&gt;<br />
+&lt;select&gt; select&lt;/select&gt;<br />
+&lt;select&gt; id, namalengkap, phone, email&lt;/select&gt;<br />
+&lt;select&gt; from contact&lt;/select&gt;<br />
+&lt;select&gt; where id = #{value}&lt;/select&gt;<br />
+&lt;select&gt; select&lt;/select&gt;<br />
+&lt;select&gt; id, namalengkap, phone, email&lt;/select&gt;<br />
+&lt;select&gt; from contact ORDER BY id DESC LIMIT 0,1&lt;/select&gt;</p>
+<p>[/xml]</p>
+<p><strong>3. Register ContactMapper.xml ke configuration.xml</strong></p>
+<p>[java]package org.mycontact.example.dao;</p>
+<p>import java.io.FileNotFoundException;<br />
+import java.io.IOException;<br />
+import java.io.Reader;</p>
+<p>import org.apache.ibatis.io.Resources;<br />
+import org.apache.ibatis.session.SqlSessionFactory;<br />
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;</p>
+<p>public class MyBatisConnectionFactory {<br />
+    private static SqlSessionFactory sqlSessionFactory;</p>
+<p>    static {<br />
+        try {</p>
+<p>            String resource = &quot;org/mycontact/example/xml/configuration.xml&quot;;<br />
+            Reader reader = Resources.getResourceAsReader(resource);</p>
+<p>            if (sqlSessionFactory == null) {<br />
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);<br />
+            }<br />
+        }<br />
+        catch (FileNotFoundException fileNotFoundException) {<br />
+            fileNotFoundException.printStackTrace();<br />
+        }<br />
+        catch (IOException iOException) {<br />
+            iOException.printStackTrace();<br />
+        }<br />
+    }</p>
+<p>    public static SqlSessionFactory getSqlSessionFactory() {</p>
+<p>        return sqlSessionFactory;<br />
+    }<br />
+}[/java]</p>
+<p><strong>4. MyBatisConnectionFactory</strong></p>
+<p>[java]<br />
+package org.mycontact.example.dao;</p>
+<p>import java.io.FileNotFoundException;<br />
+import java.io.IOException;<br />
+import java.io.Reader;</p>
+<p>import org.apache.ibatis.io.Resources;<br />
+import org.apache.ibatis.session.SqlSessionFactory;<br />
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;</p>
+<p>public class MyBatisConnectionFactory {<br />
+    private static SqlSessionFactory sqlSessionFactory;</p>
+<p>    static {<br />
+        try {</p>
+<p>            String resource = &quot;org/mycontact/example/xml/configuration.xml&quot;;<br />
+            Reader reader = Resources.getResourceAsReader(resource);</p>
+<p>            if (sqlSessionFactory == null) {<br />
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);<br />
+            }<br />
+        }<br />
+        catch (FileNotFoundException fileNotFoundException) {<br />
+            fileNotFoundException.printStackTrace();<br />
+        }<br />
+        catch (IOException iOException) {<br />
+            iOException.printStackTrace();<br />
+        }<br />
+    }</p>
+<p>    public static SqlSessionFactory getSqlSessionFactory() {</p>
+<p>        return sqlSessionFactory;<br />
+    }<br />
+}[/java]</p>
+<p><strong>5. ContactDAO</strong></p>
+<p>[java]package org.mycontact.example.dao;</p>
+<p>import java.util.List;</p>
+<p>import org.mycontact.example.dao.MyBatisConnectionFactory;<br />
+import org.apache.ibatis.session.SqlSession;<br />
+import org.apache.ibatis.session.SqlSessionFactory;</p>
+<p>import org.mycontact.example.beans.Contact;</p>
+<p>public class ContactDAO {</p>
+<p>    private SqlSessionFactory sqlSessionFactory;</p>
+<p>    public ContactDAO(){<br />
+        sqlSessionFactory = MyBatisConnectionFactory.getSqlSessionFactory();<br />
+    }</p>
+<p>    /**<br />
+     * Returns the list of all Contact instances from the database.<br />
+     * @return the list of all Contact instances from the database.<br />
+     */<br />
+    @SuppressWarnings(&quot;unchecked&quot;)<br />
+    public List selectAll(){</p>
+<p>        SqlSession session = sqlSessionFactory.openSession();</p>
+<p>        try {<br />
+            List list = session.selectList(&quot;Contact.getAll&quot;);<br />
+            return list;<br />
+        } finally {<br />
+            session.close();<br />
+        }<br />
+    }</p>
+<p>    /**<br />
+     * Returns a Contact instance from the database.<br />
+     * @param id primary key value used for lookup.<br />
+     * @return A Contact instance with a primary key value equals to pk. null if there is no matching row.<br />
+     */<br />
+    public Contact selectById(int id){</p>
+<p>        SqlSession session = sqlSessionFactory.openSession();</p>
+<p>        try {<br />
+            Contact contact = (Contact) session.selectOne(&quot;Contact.getById&quot;,id);<br />
+            return contact;<br />
+        } finally {<br />
+            session.close();<br />
+        }<br />
+    }</p>
+<p>    /**<br />
+     * Updates an instance of Contact in the database.<br />
+     * @param contact the instance to be updated.<br />
+     */<br />
+    public void update(Contact contact){</p>
+<p>        SqlSession session = sqlSessionFactory.openSession();</p>
+<p>        try {<br />
+            session.update(&quot;Contact.update&quot;, contact);<br />
+            session.commit();<br />
+        } finally {<br />
+            session.close();<br />
+        }<br />
+    }</p>
+<p>    /**<br />
+     * Insert an instance of Contact into the database.<br />
+     * @param contact the instance to be persisted.<br />
+     */<br />
+    public void insert(Contact contact){</p>
+<p>        SqlSession session = sqlSessionFactory.openSession();</p>
+<p>        try {<br />
+            session.insert(&quot;Contact.insert&quot;, contact);<br />
+            session.commit();<br />
+        } finally {<br />
+            session.close();<br />
+        }<br />
+    }</p>
+<p>    /**<br />
+     * Delete an instance of Contact from the database.<br />
+     * @param id primary key value of the instance to be deleted.<br />
+     */<br />
+    public void delete(int id){</p>
+<p>        SqlSession session = sqlSessionFactory.openSession();</p>
+<p>        try {<br />
+            session.delete(&quot;Contact.deleteById&quot;, id);<br />
+            session.commit();<br />
+        } finally {<br />
+            session.close();<br />
+        }<br />
+    }<br />
+}[/java]</p>
+<p><strong>6. Example Main program</strong></p>
+<p>lalu mencoba program kita<br />
+package org.mycontact.example.main;</p>
+<p>import java.util.List;<br />
+import org.mycontact.example.beans.Contact;<br />
+import org.mycontact.example.dao.ContactDAO;</p>
+<p>public class MainExample {</p>
+<p>public static void main(String[] args) {<br />
+ContactDAO contactdao = new ContactDAO();</p>
+<p>//insert<br />
+Contact contactIns = new Contact();<br />
+contactIns.setNamaLengkap("Jee Hernandez");<br />
+contactIns.setEmail("jee@email.com");<br />
+contactIns.setPhone("1235");<br />
+contactdao.insert(contactIns);</p>
+<p>//select last Id<br />
+Contact contact0 = contactdao.selectByLastId();<br />
+System.out.println(contact0.getId() + ":" + contact0.getEmail() + ":" + contact0.getNamaLengkap() + ":" + contact0.getPhone());</p>
+<p>//select by id = 2<br />
+Contact contact1 = contactdao.selectById(2);<br />
+System.out.println(contact1.getId() + ":" + contact1.getEmail() + ":" + contact1.getNamaLengkap() + ":" + contact1.getPhone());</p>
+<p>//delete id 4<br />
+contactdao.delete(4);</p>
+<p>//update 5<br />
+Contact contactEdit = new Contact();<br />
+contactEdit.setNamaLengkap("Jefri Edit");<br />
+contactEdit.setEmail("Jefri@email.com");<br />
+contactEdit.setPhone("123456");<br />
+contactEdit.setId(2);<br />
+contactdao.update(contactEdit);</p>
+<p>//select all<br />
+List contact2 = contactdao.selectAll();<br />
+for (Contact contact : contact2) {<br />
+System.out.println(contact.getId() + ":" + contact.getEmail() + ":" + contact.getNamaLengkap() + ":" + contact.getPhone());<br />
+}<br />
+}<br />
+}</p>
+<p>Jika Anda kurang paham ataupun kurang jelas, ada baiknya membaca User Guide MyBatis.<br />
+Selamat Berimajinasi :)</p>
+<p>NB : Maaf syntaxhighlighternya agak error ketika memasukan email.<br />
+<a href="http://loianegroner.com/2011/02/getting-started-with-ibatis-mybatis-xml-configuration/">Sumber</a></p>

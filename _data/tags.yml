@@ -1,0 +1,74 @@
+- slug: java
+  name: Java
+
+- slug: cloud
+  name: Cloud
+
+- slug: php
+  name: PHP
+
+- slug: hmvc
+  name: HMVC
+
+- slug: jdbc
+  name: JDBC
+
+- slug: python
+  name: Python
+
+- slug: github
+  name: GitHub
+
+- slug: github-pages
+  name: GitHub Pages
+
+- slug: jekyll
+  name: Jekyll
+  
+- slug: open-source
+  name: Open Source
+
+- slug: kohana
+  name: Kohana
+
+- slug: kohana-3-2
+  name: Kohana 3.2
+
+- slug: lucene
+  name: Lucene
+
+- slug: openshift
+  name: Openshift
+
+- slug: paas
+  name: PaaS
+
+- slug: persistence-framework
+  name: Persistence Framework
+
+- slug: search-engine
+  name: Search Engine
+
+- slug: templating
+  name: Templating
+
+- slug: wordpress
+  name: Wordpress
+
+- slug: mybatis
+  name: Mybatis
+
+- slug: dbcp
+  name: DBCP
+
+- slug: c3p0
+  name: C3P0
+  
+- slug: bonecp
+  name: BoneCP
+
+- slug: database-connection-pooling
+  name: Database Connection Pooling
+
+- slug: zend
+  name: Zend

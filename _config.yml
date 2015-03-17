@@ -1,22 +1,30 @@
 # This is the default format. 
-# For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink: /:categories/:year/:month/:day/:title 
-
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-auto: true
-pygments: true
-
+# For more see: http://jekyllrb.com/docs/permalinks/
+permalink: /:year/:month/:title 
+exclude: ["CNAME",".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+highlighter: pygments
+markdown: rdiscount
+paginate: 5
+layout: "post"
+paginate_path: "/page/:num"
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
-tagline: Site Tagline
-author :
-  name : Jefri Pakpahan
-  email : blah@email.test
-  github : jefrip
-  twitter : username
-  feedburner : feedname
+title : It's me Jefri
+tagline: Jefri's Blog
+
+gems:
+  - jekyll-sitemap
+
+#author :
+#  name : Jefri
+#  email : jefri.p@gmail.com
+#  github : jefrip
+#  twitter : jefriip
+#  feedburner : feedname
+
+lunr_search:
+  excludes: [rss.xml, atom.xml]
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -26,7 +34,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://jefrip.github.com
+production_url : http://jefrip.github.io
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -83,16 +91,16 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : jekyllbootstrap
-    livefyre :
-      site_id : 123
-    intensedebate :
-      account : 123abc
-    facebook :
-      appid : 123
-      num_posts: 5
-      width: 580
-      colorscheme: light
+      short_name : jefri
+    #livefyre :
+    #  site_id : 123
+    #intensedebate :
+    #  account : 123abc
+    #facebook :
+    #  appid : 123
+    #  num_posts: 5
+    #  width: 580
+    #  colorscheme: light
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
@@ -101,11 +109,14 @@ JB :
   analytics :
     provider : google 
     google : 
-        tracking_id : ''
-    getclicky :
-      site_id : 
-    mixpanel :
-        token : '_MIXPANEL_TOKEN_'
+        tracking_id : 'UA-27115677-1'
+    #getclicky :
+    #  site_id : 
+    #mixpanel :
+    #    token : '_MIXPANEL_TOKEN_'
+    #piwik :
+    #    baseURL : 'myserver.tld/piwik' # Piwik installation address (without protocol)
+    #    idsite : '1'                   # the id of the site on Piwik
 
   # Settings for sharing helper. 
   # Sharing is for things like tweet, plusone, like, reddit buttons etc.
