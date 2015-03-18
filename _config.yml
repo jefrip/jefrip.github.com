@@ -16,11 +16,11 @@ tagline: Jefri's Blog
 gems:
   - jekyll-sitemap
 
-#author :
-#  name : Jefri
+author :
+  name : Jefri
 #  email : jefri.p@gmail.com
-#  github : jefrip
-#  twitter : jefriip
+  github : jefrip
+  twitter : jefriip
 #  feedburner : feedname
 
 lunr_search:
