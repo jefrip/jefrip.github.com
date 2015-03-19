@@ -1,0 +1,48 @@
+---
+layout: post
+title: 'Android : Menampilkan/menyembunyikan keyboard'
+date: 2012-10-09 07:28:20.000000000 +07:00
+categories:
+- Android
+tags:
+- Android
+- Java
+- keyboard
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+  _syntaxhighlighter_encoded: '1'
+  dsq_thread_id: '896611246'
+author:
+  login: jefri.p
+  email: jefri.p@ui.edu
+  display_name: Jefri Pakpahan
+  first_name: Jefri
+  last_name: Pakpahan
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Android menampilkan dan menyembunyikan keyboard.</p>
+<p>sebelumnya import terlebih dahulu<br />
+<!--more--><br />
+[java]<br />
+import android.view.inputmethod.InputMethodManager;<br />
+[/java]</p>
+<p>code</p>
+<p>[java]<br />
+InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);<br />
+imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);<br />
+[/java]</p>
+<p>atau</p>
+<p>[java]<br />
+InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);<br />
+imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);<br />
+[/java]</p>
+<p>atau jika ingin ingin selalu memunculkan keyboard pada suatu window edit AndroidManifest.xml</p>
+<p>[xml]<br />
+&lt;activity android:name=&quot;.HomeActivity&quot; android:label=&quot;Home&quot;<br />
+          android:windowSoftInputMode=&quot;stateAlwaysVisible&quot;&gt;<br />
+[/xml]</p>
+<p>*Catatan biar ga lupa* :)</p>

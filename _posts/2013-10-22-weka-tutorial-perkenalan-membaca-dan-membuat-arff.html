@@ -1,0 +1,127 @@
+---
+layout: post
+title: Weka Tutorial - Perkenalan, Membaca dan Membuat ARFF
+date: 2013-10-22 03:11:18.000000000 +07:00
+categories:
+- Java
+- Programming
+tags:
+- arff
+- java
+- machine-learning
+- weka
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p><img src="/assets/weka.png" alt="weka" width="375" height="260" class="aligncenter size-full wp-image-280" /></p>
+<p>Akhir-akhir ini saya sedang bermain-main dengan Weka, baik versi GUI ataupun library untuk menggunakan fungsi-fungsi Weka (Instances, Filter, Classification, Clustering, dll). Supaya tidak lupa saya akan menuliskan satu persatu penggunaan library Weka (<a href="https://github.com/jefrip/WekaTutorial/raw/master/libs/weka-3.7.3.jar">weka-3.7.3.jar</a>) yang sudah pernah saya lakukan.<!--more--></p>
+<p>Weka dalam penggunaannya menggunakan file ARFF (Attribute-Relation File Format) adalah file yang digunakan Weka yang berisi 1 atau lebih instances dari atribut. Dalam file ARFF biasanya terdapat @RELATION namarelasi untuk menamakan relasi sebuah file ARFF, @ATTRIBUTE untuk penamaan setiap atribut baik numeric, nominal, string dan date. sedangkan @DATA pada setiap line untuk merepresentasikan sebuah instances. (Penjelasan lengkapnya ada <a href="http://weka.wikispaces.com/ARFF+%28stable+version%29">disini</a>). </p>
+<p>Langkah pertama yang terpenting dalam Weka adalah membaca file ARFF / membuat instances sebelum akan diproses klasifikasi, kluster atau hal lainnya.</p>
+<h2>Membaca File ARFF</h2>
+
+{% highlight java startinline linenos %}
+import weka.core.Instances;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+// Membaca file iris.arff menggunakan BufferedReader
+BufferedReader reader = new BufferedReader(new FileReader("/data/iris.arff"));
+
+// Membuat Instances dengan data dari file iris.arff
+Instances data = new Instances(reader);
+reader.close();
+
+// Set Class Index untuk memberitahu kelas dari target, yang akan digunakan klasifikasi. kelas target berada pada atribut terakhir.
+data.setClassIndex(data.numAttributes() - 1);
+{% endhighlight %}
+
+<p>File iris.arff dapat ditemukan pada folder Weka\data.</p>
+<p></p>
+<h2>Membuat Instances format ARFF</h2>
+<p>Sedangkan untuk membuat sebuah instances berikut contoh untuk dataset iris :</p>
+
+{% highlight java startinline linenos %}
+public void makeInstance() {
+// Membuat Attribute List
+ArrayList<Attribute> attributeList = new ArrayList<Attribute>(5);
+
+// Membuat 4 Attribute
+Attribute sepallength= new Attribute("sepallength");
+Attribute sepalwidth= new Attribute("sepalwidth");
+Attribute petallength= new Attribute("petallength");
+Attribute petalwidth= new Attribute("petalwidth");
+
+// Membuat attribute kelas target
+ArrayList<String> classVal = new ArrayList<String>(2);
+classVal.add("Iris-setosa");
+classVal.add("Iris-versicolor");
+classVal.add("Iris-virginica");
+
+// Memasukkan Attribute ke Attribute List
+attributeList.add(sepallength);
+attributeList.add(sepalwidth);
+attributeList.add(petallength);
+attributeList.add(petalwidth);
+attributeList.add(new Attribute("class", classVal));
+
+// Instances baru dengan nama relasi "iris" dengan atributList dan index 0
+Instances instances = new Instances("iris", attributeList, 0);
+
+// Set Class Index untuk memberitahu kelas dari target, yang akan digunakan klasifikasi. kelas target berada pada atribut terakhir.
+instances.setClassIndex(instances.numAttributes() - 1);
+
+// Membuat dan tambah kan Attribute ke instance
+Instance inst_co = new DenseInstance(instances.numAttributes());
+
+// Men set nilai dari Attribute:
+inst_co.setValue(sepallength, 6.9);
+inst_co.setValue(sepalwidth, 3.1);
+inst_co.setValue(petallength, 5.1);
+inst_co.setValue(petalwidth, 2.3);
+
+//menambahkan instances dari instance inst_co
+instances.add(inst_co);
+
+System.out.println("===== Instance dataset =====");
+System.out.println(instances);
+}
+{% endhighlight %}
+
+<p>Hasil dari instances yang dibuat manual :</p>
+{% highlight text startinline linenos %}
+@relation iris
+@attribute sepallength numeric
+@attribute sepalwidth numeric
+@attribute petallength numeric
+@attribute petalwidth numeric
+@attribute class {Iris-setosa,Iris-versicolor,Iris-virginica}
+
+@data
+
+6.9,3.1,5.1,2.3,?
+{% endhighlight %}
+
+<p></p>
+<h2>Menyimpan instance ke file arff</h2>
+<p>Anda dapat menyimpan instances yang sudah di buat ke file arff dengan menggunakan fungsi BufferedWriter di java.</p>
+{% highlight java startinline linenos %}
+BufferedWriter writer = new BufferedWriter(new FileWriter("data/iris_create.arff"));
+writer.write(instances.toString());
+writer.flush();
+writer.close();
+{% endhighlight %}
+<p>Sekarang cukup mudah bukan membuat sebuah instances baru melalui java. thx weka wikispaces :D</p>
+<p>Berikut file source code dan library sudah saya upload ke <a href="https://github.com/jefrip/WekaTutorial">github</a>.</p>
+<p></p>
+<h2>References : </h2>
+<p>- <a href="http://weka.wikispaces.com/ARFF+%28stable+version%29">http://weka.wikispaces.com/ARFF+%28stable+version%29</a></p>
+<p>- <a href="http://weka.wikispaces.com/Use+WEKA+in+your+Java+code#Instances-ARFF%20File">http://weka.wikispaces.com/Use+WEKA+in+your+Java+code#Instances-ARFF%20File</a></p>
+<p>- <a href="http://weka.wikispaces.com/Programmatic+Use">http://weka.wikispaces.com/Programmatic+Use</a></p>
+<p>- <a href="http://weka.wikispaces.com/Save+Instances+to+an+ARFF+File">http://weka.wikispaces.com/Save+Instances+to+an+ARFF+File</a></p>

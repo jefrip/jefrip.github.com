@@ -1,0 +1,71 @@
+---
+layout: post
+title: 'Iseng-iseng : Script PHP untuk menghitung umur'
+date: 2013-04-05 04:40:49.000000000 +07:00
+categories:
+- staffblogui
+- php
+tags:
+- php
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Iseng-iseng lagi memikirkan cara menghitung umur seseorang hasil dari mysql datetime, gampang-gampang susah.</p>
+<p>Nemu dari om gugel cara yang simple (tapi kurang tepat)</p>
+<pre>
+
+$tgl = date('Y-m-d', strtotime($tgl_lahir));
+
+$umur = floor(time() - strtotime($tgl))/(60*60*24*365);
+
+echo $umur;
+
+</pre>
+<p>Mengurangi unix time sekarang dengan unix time dari $tgl_lahir (format dari mysql datetime 'Y-m-d H:i:s'), kurang tepat karena membagi selisih unix time dengan asumsi pertahun ada 365 hari, sedangkan dalam setahun terkadang 366 hari.</p>
+<p><!--more--></p>
+<p>Cara yang lebih tepat :</p>
+<p>Masih dari om gugel</p>
+<pre>
+
+$date1 = new DateTime(date('Y-m-d', strtotime($tgl_lahir)));
+
+$date2 = new DateTime(date('Y-m-d'));
+
+$interval = $date1-&gt;diff($date2);
+
+echo "difference " . $interval-&gt;y . " years, " . $interval-&gt;m." months, ".$interval-&gt;d." days ";
+
+</pre>
+<p>namun fungsi dari php <strong>DateTime::diff</strong> hanya dapat berjalan pada PHP 5 &gt;= 5.3.0</p>
+<p>Lalu saya membuat yang dapat berjalan untuk PHP 4 ke atas</p>
+<pre>
+
+list($thn_skrg, $bln_skrg, $tgl_skrg) = explode('-', date('Y-m-d'));
+
+list($thn_lhr, $bln_lhr, $tgl_lhr) = explode('-', date('Y-m-d', strtotime($tgl_lahir)));
+
+$umur = $thn_skrg - $thn_lhr;
+
+		
+
+if($bln_skrg &lt; $bln_lhr)
+
+ $umur--;
+
+else if(($bln_skrg == $bln_lhr) &amp;&amp; ($tgl_skrg &lt; $tgl_lhr))
+
+ $umur--;
+
+echo $umur;
+
+</pre>
+<p>Meskipun agak panjang, namun hasil pemikiran sendiri. :D</p>
+<p>Bacaan :</p>
+<p><a href="http://stackoverflow.com/questions/676824/how-to-calculate-the-difference-between-two-dates-using-php" target="_blank">http://stackoverflow.com/questions/676824/how-to-calculate-the-difference-between-two-dates-using-php</a></p>

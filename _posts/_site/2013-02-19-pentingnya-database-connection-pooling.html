@@ -1,5 +1,36 @@
+---
+layout: post
+title: Pentingnya Database Connection Pooling
+date: 2013-02-19 08:02:28.000000000 +07:00
+categories:
+- database
+tags:
+- bonecp
+- c3p0
+- database-connection-pooling
+- dbcp
+status: publish
+type: post
+published: true
+meta:
+  dsq_thread_id: '1092138093'
+  _wp_old_slug: database-connection-pooling
+  _thumbnail_id: '244'
+  _yoast_wpseo_metadesc: Database Connection Pooling, DBCP, C3P0, BoneCP
+  _yoast_wpseo_focuskw: Database Connection Pooling
+  _edit_last: '1'
+  _yoast_wpseo_linkdex: '78'
+author:
+  login: admin
+  email: jefri.p@gmail.com
+  display_name: Jefri
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
 <p>Beberapa saat lalu saya memikirkan betapa pentingnya resource pada server database, dulu sewaktu saya duduk dibangku kuliah pada saat mengerjakan project/tugas belum terlalu memikirkan hal tersebut.  Jika aplikasi kita tergantung pada database otomatis kita harus selalu terkoneksi ke database, entah untuk query select, insert, update atau delete.<br />
-Connection Pooling adalah suatu metode untuk menjaga supaya koneksi database terbuka sehingga dapat digunakan kembali, karena membuka koneksi ke database adalah proses yang "Mahal", jadi pooling menjaga koneksi tetap aktif.<!--more--><a class="thumbnail" href="http://www.jefri-p.com/wp-content/uploads/2013/02/Database_connection_pooling.jpg"><img class="aligncenter size-full wp-image-244" alt="Database_connection_pooling" src="assets/Database_connection_pooling.jpg" width="340" height="125" /></a></p>
+Connection Pooling adalah suatu metode untuk menjaga supaya koneksi database terbuka sehingga dapat digunakan kembali, karena membuka koneksi ke database adalah proses yang "Mahal", jadi pooling menjaga koneksi tetap aktif.<!--more--><a class="thumbnail" href="/assets/Database_connection_pooling.jpg"><img class="aligncenter size-full wp-image-244" alt="Database_connection_pooling" src="/assets/Database_connection_pooling.jpg" width="340" height="125" /></a></p>
 <p>Keuntungan Connection Pooling :<br />
 - Mempercepat response time (pada saat membuka koneksi)<br />
 - Penggunaan kembali resource database<br />

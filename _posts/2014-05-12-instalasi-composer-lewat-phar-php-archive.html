@@ -1,0 +1,39 @@
+---
+layout: post
+title: Instalasi Composer lewat Phar (PHP archive)
+date: 2014-05-12 09:51:10.000000000 +07:00
+categories:
+- staffblogui
+- php
+tags:
+- composer
+- packagist
+- pear
+- phar
+- php
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<h2>Pendahuluan</h2>
+<p>Untuk beberapa alasan saya membutuhkan Composer untuk menginstall paket PHP dibanding <a href="http://pear.php.net/">PEAR</a>. Composer mempunyai repository yaitu <a href="https://packagist.org/">packagist</a>, Packagist di ibaratkan mirip Maven pada Java hanya saja Packagist khusus PHP dan menyediakan banyak paket PHP yang sangat lengkap. Saat tulisan ini ditulis terdapat sekitar 29.662 Paket <a href="https://packagist.org/statistics">https://packagist.org/statistics</a>. </p>
+<p><!--more--></p>
+<h2>Instalasi</h2>
+<p>Kebutuhan sistem :</p>
+<p>- Composer membutuhkan PHP &gt;= 5.3.2.</p>
+<p>Unduh Composer <a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a></p>
+<p>Pada Linux :</p>
+<p><code>curl -sS https://getcomposer.org/installer | php</code></p>
+<p>Akan menghasilkan composer.phar, Anda dapat menjalankan dengan perintah <code>php composer.phar </code></p>
+<p>Atau bila ingin menjadi shortcut <code>mv composer.phar /usr/local/bin/composer</code></p>
+<p>sehingga tinggal menjalankan <code>composer</code></p>
+<p></p>
+<p>Untuk pengguna Windows hanya tinggal mengunduh dan instal file <a href="https://getcomposer.org/Composer-Setup.exe">Composer-Setup.exe</a></p>
+<p>Tulisan berikutnya akan menginstall paket PHP lewat Composer.</p>
+<p>See ya</p>

@@ -1,0 +1,41 @@
+---
+layout: post
+title: 'Android : Menampilkan/menyembunyikan keyboard'
+date: 2012-10-09 07:28:20.000000000 +07:00
+categories:
+- staffblogui
+- java
+tags:
+- android
+- java
+- keyboard
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Android menampilkan dan menyembunyikan keyboard.</p>
+<p>sebelumnya import terlebih dahulu</p>
+<p><!--more--></p>
+
+{% highlight java startinline linenos %}
+import android.view.inputmethod.InputMethodManager;
+
+InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+{% endhighlight %}
+<p>atau</p>
+{% highlight java startinline linenos %}
+InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+{% endhighlight %}
+<p>atau jika ingin ingin selalu memunculkan keyboard pada suatu window edit AndroidManifest.xml</p>
+{% highlight xml startinline linenos %}
+<activity android:name=".HomeActivity" android:label="Home" android:windowSoftInputMode="stateAlwaysVisible">
+{% endhighlight %}
+<p>*Catatan biar ga lupa* :)</p>

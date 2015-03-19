@@ -1,0 +1,44 @@
+---
+layout: post
+title: Jatuh hati pada layanan Cloud Foundry!
+date: 2012-10-08 08:07:07.000000000 +07:00
+categories:
+- Java
+tags:
+- cloud
+- Cloud Foundry
+- Java
+- Play! Framework
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+  dsq_thread_id: '896660606'
+author:
+  login: jefri.p
+  email: jefri.p@ui.edu
+  display_name: Jefri Pakpahan
+  first_name: Jefri
+  last_name: Pakpahan
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Setelah beberapa bulan saya menggunakan layanan cloud <a title="Openshift by Red Hat" href="http://openshift.redhat.com">Openshift</a> untuk mencoba-coba layanan cloud PaaS yang 'gratis', gratis disini tidak berbayar tetapi dibatasi namun cukup untuk mencoba-coba layanan cloud (biar ga ketinggalan jaman :D). Layanan tersebut mendukung Java, Ruby, Node.js, Perl serta <strong>PHP</strong>, kebetulan saya lebih mengerti PHP jadi menarik perhatian saya dan sudah mencoba openshift untuk <a title="Jefri Blog" href="http://www.jefri-p.com">blog saya</a> (wordpress) menggunakan layanan tersebut.<!--more--></p>
+<p>Layanan cloud pada openshift tergolong sangat stabil dan cepat (dalam hal akses website dan update plugin blog). Namun baru-baru ini saya mencoba layanan <a title="Cloud Foundry" href="http://www.cloudfoundry.com">Cloud Foundry</a> yang merupakan layanan cloud PaaS juga, dari segi layanan belum mendukung PHP (atau saya belum tahu) tetapi keterbatasan yang ada di Openshift dalam hal command untuk mengupload menggunakan git lewat ssh yang mana tidak bisa saya lakukan untuk ssh keluar dari sini (kantor), kelebihan menggunakan Cloud Foundry ialah GRATIS (juga) dan dapat mengupload aplikasi yang sudah di compile ke cloud tanpa harus menggunakan git yang ssh keluar, sehingga memudahkan saya untuk mengupload. Commandnya adalah menggunakan cloud foundry command line yaitu vmc yang dapat diinstall dengan menggunakan <strong>gem install vmc</strong> (yang sebelumnya sudah menginstall ruby dan gem), ya cukup mudah.</p>
+<p>Saya mencoba mengupload sampel aplikasi <a title="Play! Framework" href="http://www.playframework.org">Play! Framework</a> melalui <a title="Play! on Cloud Foundry" href="http://blog.cloudfoundry.com/2012/05/31/cloud-foundry-now-supports-play/">tutorial</a>, kenapa Play!?ya karena saya kesengsem dan sedang mempelajari Framework tersebut yang mendukung bahasa Java dan Scala, what a nice ;)</p>
+<p>Pertama masuk ke directory sample play -&gt; cd /Users/jefripakpahan/play/play-2.0.4/samples/java/zentasks</p>
+<p>Dari directory tersebut kita compile aplikasi sampel menjadi aplikasi zip yang akan di upload dengan command : play2 -Dconfig.file=conf.cf dist</p>
+<p>Dan akan menghasilkan zentasks-1.0.zip yang akan di upload, berikut screenshoot</p>
+<p><a href="https://staff.blog.ui.ac.id/jefri.p/files/2012/10/play-dist.png"><img class="alignnone size-medium wp-image-44" alt="" src="assets/play-dist-300x107.png" /></a></p>
+<p>Berikutnya adalah menguploadnya ke Cloud Foundry dengan command : vmc push --path=dist/zentask-1.0.zip</p>
+<p>Dengan menggunakan services (db) postgresql</p>
+<p><a href="https://staff.blog.ui.ac.id/jefri.p/files/2012/10/vmc-push.png"><img class="alignnone size-medium wp-image-46" alt="" src="assets/vmc-push-300x242.png" /></a></p>
+<p>Dan setelah sukses tinggal buka url Application Deployed URL semisal : <a href="http://zentasks-jef.cloudfoundry.com">http://zentasks-jef.cloudfoundry.com</a></p>
+<p><a href="https://staff.blog.ui.ac.id/jefri.p/files/2012/10/zentasks-login.png"><img class="alignnone size-medium wp-image-47" alt="" src="assets/zentasks-login-300x163.png" /></a></p>
+<p>Halaman login</p>
+<p><a href="https://staff.blog.ui.ac.id/jefri.p/files/2012/10/zentasks-home.png"><img class="alignnone size-medium wp-image-48" alt="" src="assets/zentasks-home-300x102.png" /></a></p>
+<p>Halaman Home</p>
+<p>So easy right?</p>
+<p>Jadi ingin memperdalam lagi Play! Framework. :)</p>
+<p><span style="color: #ff0000">*Tambahan : Play 2.0.4 untuk bisa jalan di Cloud Foundry butuh tambahan library <strong><a title="auto-reconfiguration-0.6.5.jar" href="https://github.com/cloudfoundry/vcap-staging/blob/master/lib/vcap/staging/plugin/resources/auto-reconfiguration-0.6.5.jar"><span style="color: #ff0000">auto reconfiguration</span></a></strong>, taruh di folder lib*</span></p>

@@ -1,0 +1,111 @@
+---
+layout: post
+title: Install dan Setting Apache 2.2 + PHP 5.3 pada windows
+date: 2012-11-19 10:17:08.000000000 +07:00
+categories:
+- PHP
+tags:
+- Apache
+- Apache 2.2
+- httpd
+- PHP
+- PHP 5.3
+- PHP 5.3.5
+- webserver
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+  _syntaxhighlighter_encoded: '1'
+  dsq_thread_id: '934323620'
+  _wp_old_slug: install-dan-setting-apache-2-2-php-5-3
+author:
+  login: jefri.p
+  email: jefri.p@ui.edu
+  display_name: Jefri Pakpahan
+  first_name: Jefri
+  last_name: Pakpahan
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p><img src="assets/apache1-300x96.jpg" alt="" width="300" height="96" class="aligncenter size-medium wp-image-112" /><br />
+<img src="assets/plus.jpg" alt="" width="97" height="84" class="aligncenter size-full wp-image-113" /><br />
+<img src="assets/php53.jpg" alt="" width="300" height="197" class="aligncenter size-full wp-image-109" /></p>
+<p>Saya adalah penggemar <a title="Framework Kohana" href="http://kohanaframework.org">framework Kohana</a>, baru-baru ini Kohana mengeluarkan versi terbarunya yaitu <a href="https://github.com/downloads/kohana/kohana/kohana-3.3.0.zip">Kohana 3.3</a> dan membutuhkan PHP 5.3, sedangkan versi PHP yang sedang saya gunakan adalah PHP 5.2. Mau tidak mau saya harus mengganti ke PHP 5.3, dan saya kira akan mudah namun ada beberapa masalah ketika saya akan mengganti ke PHP 5.3 berikut adalah langkah-langkahnya :<!--more--><br />
+1. Saya Asumsikan Anda sudah mendownload dan menginstall <a href="http://archive.apache.org/dist/httpd/binaries/win32/">Apache 2.2</a><br />
+Tambahkan konfigurasi berikut pada httpd.conf<br />
+[plain]<br />
+LoadModule php5_module C:/PHP53/php5apache2_2.dll<br />
+AddType application/x-httpd-php .php .inc<br />
+PHPIniDir C:/PHP53/<br />
+[/plain]<br />
+*perhatian C:/PHP53/ adalah direktori dari PHP 5.3 saya</p>
+<p>2. Download dan ekstrak <a href="http://windows.php.net/downloads/releases/archives/php-5.3.5-Win32-VC6-x86.zip">PHP 5.3</a> (yang saya gunakan adalah 5.3.5-Win32-VC6-x86 thread safe)<br />
+Edit konfigurasi php.ini Anda<br />
+Tambahkan<br />
+[plain]<br />
+date.timezone = &quot;Asia/Jakarta&quot;<br />
+extension_dir = &quot;C:\PHP53\ext&quot;<br />
+[/plain]<br />
+dan juga jika Anda akan mengaktifkan extension, hilangkan saja tanda ; (titik koma)<br />
+contoh :<br />
+[plain]<br />
+;extension=php_bz2.dll<br />
+extension=php_curl.dll<br />
+;extension=php_fileinfo.dll<br />
+extension=php_gd2.dll<br />
+extension=php_http.dll<br />
+;php_http.dll dari http://downloads.php.net/pierre/php_http-5.3-svn20091125-vc6-x86.zip<br />
+;extension=php_gettext.dll<br />
+;extension=php_gmp.dll<br />
+;extension=php_intl.dll<br />
+extension=php_imap.dll<br />
+;extension=php_interbase.dll<br />
+extension=php_ldap.dll<br />
+extension=php_mbstring.dll<br />
+;extension=php_mcrypt.dll<br />
+;extension=php_exif.dll ; Must be after mbstring as it depends on it<br />
+extension=php_mysql.dll<br />
+;extension=php_mysqli.dll<br />
+extension=php_oci8.dll ; Use with Oracle 10gR2 Instant Client<br />
+;extension=php_oci8_11g.dll ; Use with Oracle 11gR2 Instant Client<br />
+extension=php_openssl.dll<br />
+;extension=php_pdo_firebird.dll<br />
+;extension=php_pdo_mssql.dll<br />
+extension=php_pdo_mysql.dll<br />
+;extension=php_pdo_oci.dll<br />
+;extension=php_pdo_odbc.dll<br />
+extension=php_pdo_pgsql.dll<br />
+extension=php_pdo_sqlite.dll<br />
+extension=php_pgsql.dll<br />
+;extension=php_pspell.dll<br />
+;extension=php_shmop.dll</p>
+<p>; The MIBS data available in the PHP distribution must be installed.<br />
+; See http://www.php.net/manual/en/snmp.installation.php<br />
+;extension=php_snmp.dll<br />
+extension=php_soap.dll<br />
+;extension=php_sockets.dll<br />
+extension=php_sqlite.dll<br />
+;extension=php_sqlite3.dll<br />
+;extension=php_sybase_ct.dll<br />
+;extension=php_tidy.dll<br />
+extension=php_xmlrpc.dll<br />
+extension=php_xsl.dll<br />
+;extension=php_zip.dll<br />
+extension=php_xdebug.dll<br />
+;php_xdebug.dll dari http://downloads.php.net/pierre/php_xdebug-2.0.5-5.3-Win32-VC6-x86.zip<br />
+extension=php_apc.dll<br />
+;php_apc.dll dari http://dev.freshsite.pl/nc/php-accelerators/apc/download/apc-316-for-php-53-vc6.html<br />
+[/plain]<br />
+*untuk extension disarankan menggunakan library VC6<br />
+Karena saya menggunakan php APC, maka saya menambah konfigurasi<br />
+[plain]<br />
+apc.shm_size=32M<br />
+[/plain]<br />
+Ada perubahan pada konfigurasi apc.shm.size ditambahkan M untuk MB atau G untuk GB.<br />
+*jika belum diubah maka akan muncul error <a href="http://syslint.com/syslint/php-warning-php-startup-apc-shm_size-now-uses-mg-suffixes-please-update-your-ini-files/">PHP Warning: PHP Startup: apc.shm_size now uses M/G suffixes, please update your ini files</a><br />
+Lalu start/restart apache server.<br />
+It's works now i'm using PHP 5.3, can't wait to try Kohana 3.3.</p>
+<p>Sekian, jika ada pertanyaan silahkan ditunggu komentarnya :)</p>
+<p>Website yang berguna untuk pengguna PHP windows http://downloads.php.net/pierre/</p>

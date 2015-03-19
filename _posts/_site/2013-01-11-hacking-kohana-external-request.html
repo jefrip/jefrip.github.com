@@ -1,0 +1,36 @@
+---
+layout: post
+title: Hacking Kohana External Request
+date: 2013-01-11 04:15:24.000000000 +07:00
+categories:
+- PHP
+tags:
+- External Request
+- Kohana3.2
+- PHP
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+  _wp_old_slug: hacking-kohana-external-request-curl
+  dsq_thread_id: '1019361494'
+author:
+  login: jefri.p
+  email: jefri.p@ui.edu
+  display_name: Jefri Pakpahan
+  first_name: Jefri
+  last_name: Pakpahan
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Iseng-iseng sedang ada kerjaan untuk membaca webservice lewat kohana 3.2 menggunakan Request::factory($url), saat akan mengakses webservice yang menggunakan protocol HTTPS (semisal https://localhost/json.php), ternyata terdapat error berikut</p>
+<p><strong>error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed<!--more--></strong></p>
+<p>karena memang tidak menggunakan valid certificate. Setelah dicari ternyata bisa menambahkan options curl nya pada system kohana (but it's not recommended)</p>
+<p>Untuk dapat mengakses webservice HTTPS yang certificatenya tidak ada/tidak valid pada kohana kita hanya tinggal menambahkan beberapa line pada file system\classes\kohana\request\client\curl.php</p>
+<p>$this-&gt;_options[CURLOPT_SSL_VERIFYHOST]    = FALSE;<br />
+$this-&gt;_options[CURLOPT_SSL_VERIFYPEER]    = FALSE;</p>
+<p>Jika Anda ingin menggunakan Request::factory() via proxy dapat menambahkan :</p>
+<p>$this-&gt;_options[CURLOPT_PROXY]            = 'ip_proxy_server';<br />
+$this-&gt;_options[CURLOPT_PROXYPORT] = 'port_proxy_server';</p>
+<p>Dan akhirnya bisa mengakses webservice yang menggunakan HTTPS.</p>

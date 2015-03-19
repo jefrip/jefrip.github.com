@@ -1,0 +1,54 @@
+---
+layout: post
+title: 'Android : Install default Aplikasi Android kita ke SD Card'
+date: 2012-11-13 08:05:40.000000000 +07:00
+categories:
+- staffblogui
+- java
+tags:
+- android
+- java
+- sd-card
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Saya sedang develop aplikasi Android untuk skripsi sarjana saya, sebelumnya default adalah ke penyimpanan internal namun ada beberapa teman menanyakan untuk bisa install ke penyimpanan external/SD Card. Setelah ditelusuri ternyata fitur ini dapat dilakukan pada Android API Level 8 / Android 2.2 (Froyo) ke atas.</p>
+<p>Hal ini dapat dilakukan dengan cara memodifikasi file manifest / AndroidManifest.xml Anda dengan menambahkan android:installLocation pada elemen atribut .<!--more--></p>
+{% highlight xml startinline linenos %}
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="preferExternal"
+ ... >
+{% endhighlight%}
+<p>Untuk value <strong>"preferExternal"</strong> maka aplikasi Anda akan diinstal pada penyimpanan external, jika penyimpanan external penuh maka aplikasi akan di instal di penyimpanan internal.</p>
+{% highlight xml startinline linenos %}
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"</p>
+    android:installLocation="auto"
+ ... >
+{% endhighlight %}
+<p>Untuk value <strong>"auto"</strong> maka aplikasi Anda akan dapat diinstal pada penyimpanan external. Sistem yang akan memutuskan lokasi untuk menginstal aplikasi Anda.</p>
+<p>Dengan salah satu value tersebut, pengguna nantinya juga dapat memindahkan aplikasi antara dua lokasi.</p>
+<p>Contoh Aplikasi yang dapat dipindahkan ke SD Card :</p>
+<p><a class="thumbnail" href="/assets/SC20121113-123514.png"><img src="/assets/SC20121113-123514-180x300.png" alt="" width="180" height="300" class="alignnone size-medium wp-image-72" /></a></p>
+<p>Contoh Aplikasi yang tidak dapat dipindahkan ke SD Card :</p>
+<p><a class="thumbnail" href="/assets/SC20121113-123541.png"><img src="/assets/SC20121113-123541-180x300.png" alt="" width="180" height="300" class="alignnone size-medium wp-image-73" /></a></p>
+<p><strong>Catatan penting!!</strong></p>
+<p>Ada beberapa feature dari android sehinggga membuat aplikasi tidak boleh/bisa diinstal ke penyimpanan external :</p>
+<p> - Service</p>
+<p> - Alarm Service</p>
+<p> - Input Method Engine</p>
+<p> - Live Wallpaper</p>
+<p> - App Widgets</p>
+<p> - Account Manager</p>
+<p> - Sync Adapters</p>
+<p> - Device Administrator</p>
+<p> - Broadcast Receiver Listening for "boot completed"</p>
+<p> - Copy Protection</p>
+<p>Jika Aplikasi Anda memakai feature diatas disarankan untuk tidak membuat aplikasi berjalan pada penyimpanan external.</p>
+<p>Untuk Selengkapnya dapat dibaca pada Guide Developer Android <a href="http://developer.android.com/guide/topics/data/install-location.html" title="App Install Location">App Install Location</a>.</p>

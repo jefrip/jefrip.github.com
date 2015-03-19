@@ -1,0 +1,68 @@
+---
+layout: post
+title: 'Android : Beberapa cara OnClickListener'
+date: 2012-10-12 04:06:13.000000000 +07:00
+categories:
+- staffblogui
+- java
+tags:
+- android
+- java
+- onclicklistener
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Berikut adalah beberapa cara OnClickListener</p>
+
+{% highlight java startinline linenos %}
+findViewById(R.id.btnAksi).setOnClickListener(new OnClickListener() {
+	@Override
+	public void onClick(View v) {
+	// Aksi yang akan dilakukan saat button di klik
+	}
+});
+{% endhighlight%}
+
+<p><!--more--></p>
+
+<p>Ada cara lain jika mempunyai banyak button dan untuk mengurangi code</p>
+
+{% highlight java startinline linenos %}
+View.OnClickListener handler = View.OnClickListener() {
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_aksi1:
+	    //Aksi yang akan dilakukan
+                break;
+            case R.id.btn_aksi2:
+	    //Aksi yang akan dilakukan
+                break;
+        }
+    }
+}
+findViewById(R.id.btn_aksi1).setOnClickListener(handler);
+findViewById(R.id.btn_aksi2).setOnClickListener(handler);
+{% endhighlight %}
+<p>Dan ada 1 lagi OnClickListener dengan menambahkan atribut onClick pada xml button tersebut</p>
+
+{% highlight java startinline linenos %}
+class HomeActivity extends Activity {
+    public void btnClickHandler(View v) {
+	  //Aksi yang akan dilakukan
+    }
+}
+
+{% endhighlight %}
+
+{% highlight xml startinline linenos %}
+<Button android:onClick="btnClickHandler">
+</Button>
+{% endhighlight %}
+<p>Fungsi btnClickHandler harus mempunyai 1 argument View dan harus di set public.</p>

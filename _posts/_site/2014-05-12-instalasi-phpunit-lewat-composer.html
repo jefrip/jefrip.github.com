@@ -1,0 +1,41 @@
+---
+layout: post
+title: Instalasi PHPUnit lewat Composer
+date: 2014-05-12 10:21:36.000000000 +07:00
+categories:
+- Programming
+tags:
+- composer
+- phar
+- PHP
+- PHPUnit
+status: draft
+type: post
+published: false
+meta:
+  _edit_last: '863'
+  _syntaxhighlighter_encoded: '1'
+author:
+  login: jefri.p
+  email: jefri.p@ui.edu
+  display_name: Jefri Pakpahan
+  first_name: Jefri
+  last_name: Pakpahan
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Setelah sebelumnya <a href="http://staff.blog.ui.ac.id/jefri.p/2014/05/instalasi-composer-lewat-phar-php-archive/">Instalasi Composer, saya membutuhkan PHPUnit untuk membuat Unit testing pada aplikasi PHP.</p>
+<p>[text]{<br />
+    &quot;require-dev&quot;: {<br />
+        &quot;phpunit/phpunit&quot;: &quot;3.7.*&quot;,<br />
+        &quot;phpunit/phpunit-selenium&quot;: &quot;&gt;=1.2&quot;,<br />
+        &quot;phpunit/dbunit&quot;: &quot;&gt;=1.2&quot;,<br />
+        &quot;phpunit/phpunit-story&quot;: &quot;*&quot;<br />
+    },<br />
+    &quot;autoload&quot;: {<br />
+        &quot;psr-0&quot;: {&quot;&quot;: &quot;src&quot;}<br />
+    },<br />
+    &quot;config&quot;: {<br />
+        &quot;bin-dir&quot;: &quot;bin/&quot;<br />
+    }<br />
+}[/text]</a></p>

@@ -1,27 +1,24 @@
 - slug: general
   name: General
-  color: '#3498db'
   
 - slug: programming
   name: Programming
-  color: '#1abc9c'
   
 - slug: java
   name: Java
-  color: '#2b48db'
   
 - slug: php
   name: PHP
-  color: '#2bdc9c'
 
 - slug: database
   name: Database
-  color: '#2398db'
   
 - slug: cloud
   name: Cloud
-  color: '#54ffdd'
 
 - slug: mybatis
   name: Mybatis
-  color: '#2398db'
+
+- slug: staffblogui
+  name: staff.blog.ui.ac.id
+

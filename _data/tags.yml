@@ -72,3 +72,181 @@
 
 - slug: zend
   name: Zend
+
+- slug: machine-learning
+  name: Machine Learning
+
+- slug: classifier
+  name: Classifier
+
+- slug: decision-tree
+  name: Decision Tree
+
+- slug: bayesian-network
+  name: Bayesian Network
+
+- slug: data-mining
+  name: Data Mining
+
+- slug: svm
+  name: SVM
+
+- slug: weka
+  name: Weka
+
+- slug: cloud-foundry
+  name: Cloud Foundry
+
+- slug: play-framework
+  name: Play! Framework
+
+- slug: android
+  name: Android
+
+- slug: keyboard
+  name: Keyboard
+
+- slug: onclicklistener
+  name: OnClickListener
+
+- slug: sd-card
+  name: SD Card
+
+- slug: apache
+  name: Apache
+
+- slug: apache-22
+  name: Apache 2.2
+
+- slug: webserver
+  name: Webserver
+
+- slug: php-53
+  name: PHP 5.3
+
+- slug: gcc
+  name: GCC
+
+- slug: mac-os-x
+  name: Mac OS X
+
+- slug: ruby
+  name: Ruby
+
+- slug: rvm
+  name: RVM
+
+- slug: xcode
+  name: XCode
+
+- slug: css3
+  name: CSS 3
+
+- slug: html5
+  name: HTML 5
+
+- slug: presentasi
+  name: Presentasi
+
+- slug: revealjs
+  name: Reveal.js
+
+- slug: apache-maven-3-0-5
+  name: Apache Maven 3.0.5
+
+- slug: json
+  name: JSON
+
+- slug: d3js
+  name: D3.js
+
+- slug: rest
+  name: REST
+
+- slug: svg
+  name: SVG
+
+- slug: charts
+  name: Charts
+
+- slug: slim-framework
+  name: Slim Framework
+
+- slug: arff
+  name: ARFF
+
+- slug: iphone
+  name: iPhone
+
+- slug: iphone3gs
+  name: iPhone 3GS
+
+- slug: appstore
+  name: Appstore
+
+- slug: ios-613
+  name: IOS 6.1.3
+
+- slug: ios-70
+  name: IOS 7.0
+
+- slug: itunes
+  name: iTunes
+
+- slug: debian
+  name: Debian
+
+- slug: php5
+  name: PHP 5
+
+- slug: php5-mysql
+  name: PHP5-MySQL 
+
+- slug: php5
+  name: PHP 5
+
+- slug: php5-mysqlnd
+  name: PHP5-MySQLND
+
+- slug: mysql
+  name: MySQL
+
+- slug: phar
+  name: Phar
+
+- slug: composer
+  name: Composer
+
+- slug: pear
+  name: PEAR
+
+- slug: packagist
+  name: Packagist
+
+- slug: yii
+  name: Yii
+
+- slug: yii-framework
+  name: Yii Framework
+
+- slug: yii1
+  name: Yii 1
+
+- slug: yii20
+  name: Yii 2.0
+
+- slug: yii-booster
+  name: Yii Booster
+
+- slug: yii-rights
+  name: Yii Rights
+
+- slug: yii-user
+  name: Yii User
+
+- slug: jasig-cas
+  name: Jasig CAS
+
+- slug: phpcas
+  name: PHP CAS
+

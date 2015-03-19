@@ -1,0 +1,65 @@
+---
+layout: post
+title: Yii 2.0 + Jasig phpCAS
+date: 2015-02-03 10:18:36.000000000 +07:00
+categories:
+- staffblogui
+- php
+tags:
+- composer
+- jasig-cas
+- phpcas
+- yii20
+- yii-framework
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Setelah di posting sebelumnya tentang <a href="https://staff.blog.ui.ac.id/jefri.p/2014/09/my-yii-environment/">Yii Environtment</a>, di kantor saya yakni PPSI yang baru berubah menjadi DSTI sudah menggunakan Single Sign On melalui phpCAS. Beberapa aplikasi baru diharapkan menggunakan SSO untuk login akun JUITA (akun UI). Yii 2.0 adalah framework yang saya pilih untuk SSO menggunakan library phpCAS, caranya pun cukup mudah.<!--more--></p>
+<p>1. Pastikan Anda mempunyai Composer (<a href="https://staff.blog.ui.ac.id/jefri.p/2014/05/instalasi-composer-lewat-phar-php-archive/">cara instalasi Composer</a>) dan sudah menginstalasi Yii 2.0 Framework (baik basic ataupun advanced, disini saya mengunduh aplikasi <a href="https://github.com/yiisoft/yii2/releases/download/2.0.2/yii-basic-app-2.0.2.tgz">Yii 2.0 basic app</a>).</p>
+<p>2. Jangan lupa lakukan perintah composer <code>php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"</code>.</p>
+<p>3. Tambahkan library phpCAS pada file composer.json seperti berikut (punya saya) :</p>
+
+{% highlight json startinline linenos %}
+"require": {
+	"php": ">=5.4.0",
+	"yiisoft/yii2": "*",
+	"yiisoft/yii2-bootstrap": "*",
+	"yiisoft/yii2-swiftmailer": "*",
+	"jasig/phpcas": "1.3.3"
+},
+{% endhighlight%}
+
+<p>lalu lakukan <code>composer update</code></p>
+<p>4. Sekarang tinggal setting <strong>casHost</strong>, <strong>casPort</strong> dan <strong>casContext</strong> dari CAS server, pada config/params.php tambahkan (contoh) :</p>
+{% highlight php startinline linenos %}
+<?php
+
+return [
+'casHost' => 'sso.ui.ac.id',
+'casPort' => 443,
+'casContext' => 'cas',
+];
+{% endhighlight %}
+
+<p>* nb : Dibutuhkan hak akses aplikasi ke cas server dibutuhkan agar dapat mengakses CAS server.</p>
+<p>5. Contoh controller/action untuk login ke CAS server</p>
+<p><a href="https://own.ui.ac.id/git/snippets/1" title="Snippet SiteController" target="_blank">Snippet SiteController</a></p>
+{% highlight php startinline linenos %}
+// Enable debugging
+\phpCAS::setDebug();
+// Initialize phpCAS
+\phpCAS::client(CAS_VERSION_2_0, \Yii::$app->params['casHost'], \Yii::$app->params['casPort'], \Yii::$app->params['casContext']);
+\phpCAS::setNoCasServerValidation();
+\phpCAS::forceAuthentication();
+
+echo \phpCAS::getUser();
+{% endhighlight %}
+<p>Anda akan diminta login SSO, setelah login maka akan muncul username Anda.</p>
+<p>Sekian.</p>

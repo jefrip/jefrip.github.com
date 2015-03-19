@@ -1,0 +1,41 @@
+---
+layout: post
+title: Install Apache Maven pada Windows
+date: 2013-05-23 08:43:40.000000000 +07:00
+categories:
+- staffblogui
+- java
+tags:
+- apache
+- apache-maven-3-0-5
+- java
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Maven adalah sebuah build automation tool untuk java (selengkapnya <a href="http://en.wikipedia.org/wiki/Apache_Maven" target="_blank">http://en.wikipedia.org/wiki/Apache_Maven</a>). </p>
+<p>Sebuah project membutuhkan maven jika terdapat sebuah file xml, untuk maven 1 biasanya bernama project.xml sedangkan untuk maven 2 bernama pom.xml berisi informasi sebuah projek dan detil konfigurasi maven. Project Object Model adalah sebuah unit fundamental kerja di maven. Berikut cara untuk menginstall di windows :<!--more--></p>
+<p>1. Prequirement :</p>
+<p>- JDK (yang di pakai JDK jdk1.6.0_41, dapat mendownload di <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>)</p>
+<p>2. Download Apache Maven di <a href="http://maven.apache.org/download.cgi" title="Download Apache Maven" target="_blank"> http://maven.apache.org/download.cgi</a> (penulis mendownload Maven 3.0.5 (Binary zip)) dan ekstrak apache-maven-3.0.5-bin.zip ke C:\maven, sehingga directory apache maven menjadi C:\maven\apache-maven-3.0.5</p>
+<p>4. Tambahkan environment variable (Saya tambahkan ke User Variables) yaitu : JAVA_HOME (direktori JDK Anda), M2_HOME (direktori apache maven), dan Path.</p>
+<pre>
+
+JAVA_HOME = C:\Program Files\Java\jdk1.6.0_41
+
+M2_HOME = C:\maven\apache-maven-3.0.5
+
+Path = %JAVA_HOME%\bin;%M2_HOME%\bin
+
+</pre>
+<p><a href="/assets/maven_path.png"><img src="/assets/maven_path-258x300.png" alt="maven_path" width="258" height="300" class="aligncenter size-medium wp-image-194" /></a></p>
+<p>4. Jalankan
+<pre>mvn --version</pre>
+<p><a href="/assets/mvn_version.png"><img src="/assets/mvn_version-300x153.png" alt="mvn_version" width="300" height="153" class="aligncenter size-medium wp-image-197" /></a></p>
+<p>Yak maven sudah terinstal :)</p>

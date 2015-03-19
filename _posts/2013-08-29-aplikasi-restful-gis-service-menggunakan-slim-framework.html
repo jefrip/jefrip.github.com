@@ -1,0 +1,251 @@
+---
+layout: post
+title: Aplikasi RESTful (GIS Service) menggunakan Slim Framework
+date: 2013-08-29 07:42:05.000000000 +07:00
+categories:
+- staffblogui
+- php
+tags:
+- gis-service
+- rest
+- slim-framework
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p><a href="/assets/slim.png"><img src="/assets/slim.png" alt="slim" width="134" height="71" class="aligncenter size-full" /></a></p>
+<p>Beberapa waktu lalu seorang teman (Edwin) membuatkan webservice (SOAP) dengan menggunakan java (http://210.247.242.106/GISService/Service?wsdl) tentang database provinsi, kecamatan dan desa di Indonesia yang didapatkan dari Panji09 pada thread di <a href="http://www.kaskus.co.id/thread/518298ae8227cf927f000003/sharedatabase-wilayah-indonesia">kaskus</a>. </p>
+<p>Kali ini saya mencoba untuk membuat webservice (REST) sederhana dengan menggunakan Slim Framework. </p>
+<p><!--more--></p>
+<h1><strong>Apa itu REST?</strong></h1>
+<p><a href="http://en.wikipedia.org/wiki/Representational_state_transfer" title="REST" target="_blank">REST adalah Representational State Transfer</a>. </p>
+<p>- REST menggunakan protokol HTTP (Create, Read, Update, Delete) dengan metode POST, GET, PUT, DELETE.</p>
+<p>- REST alternatif dari RPC atau webservice SOAP, WSDL dll.</p>
+<p>- REST sebenarnya bukanlah sebuah standar, hanya sebuah Architectural style bukan seperti SOAP menggunakan protokol.</p>
+<h1><strong>Kenapa Slim Framework?</strong></h1>
+<p>- Karena mirip dengan <a href="http://www.sinatrarb.com" title="Sinatra" target="_blank">Sinatra</a> (Ruby).</p>
+<p>- Slim menggunakan PHP &gt;= 5.3.0.</p>
+<p>- Ukurannya relatif kecil.</p>
+<p>- Mudah dipelajari.</p>
+<h1><strong>Fitur</strong></h1>
+<blockquote>
+<p>    Powerful router</p>
+<p>        Standard and custom HTTP methods</p>
+<p>        Route parameters with wildcards and conditions</p>
+<p>        Route redirect, halt, and pass</p>
+<p>        Route middleware</p>
+<p>    Template rendering with custom views</p>
+<p>    Flash messages</p>
+<p>    Secure cookies with AES-256 encryption</p>
+<p>    HTTP caching</p>
+<p>    Logging with custom log writers</p>
+<p>    Error handling and debugging</p>
+<p>    Middleware and hook architecture</p>
+<p>    Simple configuration</p>
+</blockquote>
+<p>Contoh penggunaan slim dengan koneksi ke database lewat PDO :</p>
+
+{% highlight php startinline linenos %}
+<?php
+
+require 'Slim/Slim.php';
+
+require 'db.php';
+
+\Slim\Slim::registerAutoloader();
+
+$app = new \Slim\Slim(array(
+
+'mode' => 'production',
+
+'log.writer' => new \Slim\Extras\Log\DateTimeFileWriter(array(
+
+'path' => './logs',
+
+'name_format' => 'Y-m-d',
+
+'message_format' => '%label% - %date% - %message%'
+
+))
+
+));
+
+$app->contentType("application/json");
+
+$app->get('/getProvinsis', 'getProvinsis');
+
+$app->get('/getKabupatens/:id', 'getKabupatens');
+
+$app->get('/getKecamatans/:id', 'getKecamatans');
+
+$app->get('/getDesas/:id', 'getDesas');
+
+// Only invoked if mode is "production"
+
+$app->configureMode('production', function () use ($app) {
+
+$app->config(array(
+
+'log.enable' => true,
+
+'log.level' => \Slim\Log::WARN,
+
+'debug' => false
+
+));
+
+});
+
+// Only invoked if mode is "development"
+
+$app->configureMode('development', function () use ($app) {
+
+$app->config(array(
+
+'log.enable' => false,
+
+'log.level' => \Slim\Log::DEBUG,
+
+'debug' => true
+
+));
+
+});
+
+$app->notFound(function () use ($app) {
+
+echo 'notFound coy';
+
+});
+
+$app->run();
+
+//All Functions goes here
+
+function getProvinsis()
+
+{
+
+global $app;
+
+$sql = "select * FROM provinsi ORDER BY id";
+
+try {
+
+$app->etag('getProvinsis');
+
+$db = getConnection();
+
+$stmt = $db->query($sql);
+
+$provinsis = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+$db = null;
+
+echo json_encode($provinsis);
+
+} catch(\PDOException $e) {
+
+echo '{"error":{"text":'. $e->getMessage() .'}}';
+
+}
+
+}
+
+function getKabupatens($id)
+
+{
+
+$sql = "SELECT * FROM kabupaten WHERE id_prov = :id";
+
+try {
+
+$db = getConnection();
+
+$stmt = $db->prepare($sql);
+
+$stmt->bindParam("id", $id);
+
+$stmt->execute();
+
+$kabupatens = $stmt->fetchAll();
+
+$db = null;
+
+echo json_encode($kabupatens);
+
+} catch (\PDOException $e) {
+
+echo '{"error":{"text":'. $e->getMessage() .'}}';
+
+}
+
+}
+
+function getKecamatans($id)
+
+{
+
+$sql = "SELECT * FROM kecamatan WHERE id_kabupaten = :id";
+
+try {
+
+$db = getConnection();
+
+$stmt = $db->prepare($sql);
+
+$stmt->bindParam("id", $id);
+
+$stmt->execute();
+
+$kecamatans = $stmt->fetchAll();
+
+$db = null;
+
+echo json_encode($kecamatans);
+
+} catch (\PDOException $e) {
+
+echo '{"error":{"text":'. $e->getMessage() .'}}';
+
+}
+
+}
+
+function getDesas($id)
+{
+
+$sql = "SELECT * FROM desa WHERE id_kecamatan = :id";
+
+try {
+
+$db = getConnection();
+
+$stmt = $db->prepare($sql);
+
+$stmt->bindParam("id", $id);
+
+$stmt->execute();
+
+$desas = $stmt->fetchAll();
+
+$db = null;
+
+	echo json_encode($desas);
+} catch (\PDOException $e) {
+	echo '{"error":{"text":'. $e->getMessage() .'}}';
+}
+}
+{% endhighlight %}
+
+<h2>Download </h2>
+<p>Anda dapat mendownload source code di <a href="https://github.com/jefrip/GISService">https://github.com/jefrip/GISService</a></p>
+<p>Referensi : </p>
+<p>- <a href="https://github.com/edwinkun/GISService">https://github.com/edwinkun/GISService</a></p>
+<p>- <a href="http://coenraets.org/blog/2011/12/restful-services-with-jquery-php-and-the-slim-framework/">http://coenraets.org/blog/2011/12/restful-services-with-jquery-php-and-the-slim-framework/</a></p>

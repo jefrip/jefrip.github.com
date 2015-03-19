@@ -1,3 +1,42 @@
+---
+layout: post
+title: Mencicipi Cloud Hosting gratis di OpenShift by Red Hat
+date: 2012-06-20 05:44:41.000000000 +07:00
+categories:
+- cloud
+tags:
+- cloud
+- openshift
+- paas
+- wordpress
+status: publish
+type: post
+published: true
+meta:
+  _jd_tweet_this: 'yes'
+  _jd_twitter: ''
+  _wp_jd_clig: ''
+  _wp_jd_bitly: ''
+  _wp_jd_wp: http://www.jefri-p.com/?p=110
+  _wp_jd_yourls: ''
+  _wp_jd_url: ''
+  _wp_jd_target: http://www.jefri-p.com/?p=110
+  _jd_wp_twitter: 'a:1:{i:0;s:94:"New post: Mencicipi Cloud Hosting gratis di OpenShift
+    by Red Hat http://www.jefri-p.com/?p=110";}'
+  _jd_post_meta_fixed: 'true'
+  _edit_last: '1'
+  if_slider_image: http://www.jefri-p.com/wp-content/uploads/2012/06/cloud-computing-kitchen-sink4.jpg
+  dsq_thread_id: '733616798'
+  _thumbnail_id: '111'
+author:
+  login: admin
+  email: jefri.p@gmail.com
+  display_name: Jefri
+  first_name: ''
+  last_name: ''
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
 <p>Apa itu cloud computing? dalam blog <a title="Teknologi Cloud Computing" href="http://teknoinfo.web.id/teknologi-cloud-computing/" target="_blank">teknoinfo.web.id</a> dijelaskan bahwa Cloud Computing adalah topik yang sedang hangat dibicarakan dan lambat laun para IT professional akan mengadaptasi teknologi ini.</p>
 <p>Di blog tersebut pun dijelaskan beberapa teknologi cloud service, seperti :</p>
 <p>- <a title="Infrastructure as a Service" href="http://en.wikipedia.org/wiki/Infrastructure_as_a_service" target="_blank">Infrastucture as a Service (IaaS)</a></p>
@@ -9,13 +48,13 @@ Disini kita akan mencoba menggunakan salah satu cloud service (Paas) gratis pada
 <p>- <a title="Ruby" href="http://rubyforge.org/" target="_blank">Ruby</a></p>
 <p>- <a title="RubyGems" href="http://rubygems.org/" target="_blank">RubyGems </a></p>
 <p>Lalu setelah register dan menginstall client tools, login ke Account OpenShift di <a href="https://openshift.redhat.com/app/login">https://openshift.redhat.com/app/login</a> , setelah masuk ke dashboard Openshift, kita set dahulu namespace agar aplikasi kita unik dan menghindari url yang sama, klik tab <a title="OpenShift My Account" href="https://openshift.redhat.com/app/account" target="_blank">My Account</a></p>
-<p><a href="http://www.jefri-p.com/wp-content/uploads/2012/06/namespace.jpg"><img class="aligncenter size-full wp-image-111" title="openshift namespace" src="assets/namespace.jpg" alt="openshift namespace" width="550" height="240" /></a></p>
+<p style="text-align: center;"><a href="http://www.jefri-p.com/wp-content/uploads/2012/06/namespace.jpg"><img class="aligncenter wp-image-111" title="openshift namespace" src="/assets/namespace.jpg" alt="openshift namespace" width="550" height="240" /></a></p>
 <p>Lalu klik tab create application.</p>
-<p style="text-align: center;"><a href="http://www.jefri-p.com/wp-content/uploads/2012/06/create-application.jpg"><img class="aligncenter  wp-image-114" title="OpenShift create application" src="assets/create-application-1024x700.jpg" alt="OpenShift create application" width="547" height="374" /></a></p>
+<p style="text-align: center;"><a href="/assets/create-application.jpg"><img class="aligncenter  wp-image-114" title="OpenShift create application" src="/assets/create-application-1024x700.jpg" alt="OpenShift create application" width="547" height="374" /></a></p>
 <p>Pilih aplikasi Framework / CMS yang akan kita install, disini saya memilih WordPress, lalu masukkan nama aplikasi yang akan kita buat dalam namespace ea-rhcloud.com disini saya memakai http://blog.ea-rhcloud.com klik Create Application.</p>
-<p style="text-align: center;"><a href="http://www.jefri-p.com/wp-content/uploads/2012/06/wordpress.jpg"><img class="aligncenter  wp-image-117" title="wordpress" src="assets/wordpress.jpg" alt="" width="557" height="406" /></a></p>
+<p style="text-align: center;"><a href="/assets/wordpress.jpg"><img class="aligncenter  wp-image-117" title="wordpress" src="/assets/wordpress.jpg" alt="" width="557" height="406" /></a></p>
 <p style="text-align: left;">Tunggu hingga proses Configure new Application selesai.</p>
-<p style="text-align: center;"><a href="http://www.jefri-p.com/wp-content/uploads/2012/06/created-successfully.jpg"><img class="aligncenter  wp-image-118" title="created successfully" src="assets/created-successfully.jpg" alt="" width="563" height="417" /></a></p>
+<p style="text-align: center;"><a href="/assets/created-successfully.jpg"><img class="aligncenter  wp-image-118" title="created successfully" src="/assets/created-successfully.jpg" alt="" width="563" height="417" /></a></p>
 <p style="text-align: left;">Ya Anda telah berhasil menginstall WordPress di OpenShift, buka alamat url nya, disini http://blog-ea.rhcloud.com dan jangan lupa mengganti password default adminnya. jika Anda ingin mengclone directory dari WordPress dapat menggunakan git clone (url yang di sebutkan pada akhir instalasi).  contoh : git clone ssh://bc8208f0819a43298775553eee04b86d@blog-ea.rhcloud.com/~/git/blog.git/</p>
 <p style="text-align: left;">Anda juga dapat mengimport data WordPress menggunakan phpmyadmin, tetapi sebelumnya harus Add Cartridge, lalu pilih phpMyAdmin 3.4, maka Anda dapat mengimport melalui url http://blog-ea.rhcloud.com/phpmyadmin.</p>
 <p style="text-align: left;">NB : website saya <a href="http://www.jefri-p.com">http://www.jefri-p.com</a> sedang mencoba OpenShift, mudah-mudahan gratisannya lama (hidup gratisan!).</p>

@@ -1,0 +1,181 @@
+---
+layout: post
+title: Membuat Grafik menggunakan HTML (SVG)
+date: 2013-07-17 04:45:41.000000000 +07:00
+categories:
+- staffblogui
+tags:
+- html5
+- charts
+- d3js
+- json
+- svg
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '863'
+author: 
+  login: admin
+excerpt: !ruby/object:Hpricot::Doc
+  options: {}
+---
+<p>Beberapa waktu lalu iseng-iseng ingin membuat grafik untuk keperluan kerjaan, sempat mikir buat pakai fusionchart (grafik berbasis flash berlisensi alias bayar). Waktu tugas kuliah pernah pake fusionchart, lumayan mudah menggunakannya tapi gw hindarin sesuatu yang berbasis flash (except youtube, mdh2an nanti ga berbasis flash :D) karna flash ternyata kurang bagus dan banyak makan resource CPU ampe bikin PC hang *curhat* gmn klo smartphone, bisa meledak *lebay dan kebetulan library d3js gratis seperti library reveal.js yang saya gunakan untuk <a href="https://staff.blog.ui.ac.id/jefri.p/2013/05/selamat-tinggal-powerpoint/" title="selamat-tinggal-powerpoint" target="_blank">mengganti powerpoint</a>.</p>
+<p>Seperti biasa siapa lagi yang ditanya klo bukan ke mbah gugel. Sempat nyoba beberapa seperti <a href="http://www.chartjs.org/" title="chart.JS" target="_blank">Chart.Js</a> bagus sih tapi terlalu simpel kurang interaktif dan kurang greget gitu,hehe..</p>
+<p>Akhirnya ketemu sama 1 library javascript yaitu <a href="http://d3js.org/" title="d3.js" target="_blank">D3.js</a> menurut keterangan websitenya :</p>
+<p><a href="http://d3js.org/"><img src="/assets/d3js.png" alt="d3js" width="968" height="456" class="aligncenter size-full wp-image-231" /></a><!--more--></p>
+<blockquote>
+<p>D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, SVG and CSS. D3’s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.</p>
+</blockquote>
+<p>Yes this is what i want! Terlebih saat melihat <a href="https://github.com/mbostock/d3/wiki/Gallery" title="D3js examples gallery" target="_blank">contoh-contoh grafiknya</a>, banyak sekali, menantang dan cukup gereget lihatnya. Sehingga pilihan hati gw jatuh kepada d3.js :D, tapi cinta tetep buat si pacar *lho*.</p>
+<p>D3.js menggunakan syntax SVG dalam HTML dan mendukung banyak browser desktop bahkan mobile, berikut link tabel-tabel terhadap <a href="http://caniuse.com/svg" target="_blank">dukungan SVG pada HTML</a>. Pertama nyoba sih agak susah, tapi dari contoh-contohnya cukup mudah kebetulan saya hanya menggunakan Basic Chart saja.</p>
+<p><a href="http://bl.ocks.org/mbostock/3883245" title="Line Chart" target="_blank">Line Chart</a> menggunakan data dari format JSON :</p>
+
+{% highlight html startinline linenos %}
+<meta charset="utf-8">
+<style>
+
+body {
+
+font: 10px sans-serif;
+
+}
+
+.axis path,
+
+.axis line {
+
+fill: none;
+
+stroke: #000;
+
+shape-rendering: crispEdges;
+
+}
+
+.x.axis path {
+
+display: none;
+
+}
+
+.line {
+
+fill: none;
+
+stroke: steelblue;
+
+stroke-width: 1.5px;
+
+}
+
+</style>
+
+<body>
+
+<script src="d3.js"></script>
+
+<script>
+
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+
+width = 960 - margin.left - margin.right,
+
+height = 500 - margin.top - margin.bottom;
+
+var parseDate = d3.time.format("%d-%b-%y").parse;
+
+var x = d3.time.scale()
+
+.range([0, width]);
+
+var y = d3.scale.linear()
+
+.range([height, 0]);
+
+var xAxis = d3.svg.axis()
+
+.scale(x)
+
+.orient("bottom");
+
+var yAxis = d3.svg.axis()
+
+.scale(y)
+
+.orient("left");
+
+var line = d3.svg.line()
+
+.x(function(d) { return x(d.date); })
+
+.y(function(d) { return y(d.close); });
+
+var svg = d3.select("body").append("svg")
+
+.attr("width", width + margin.left + margin.right)
+
+.attr("height", height + margin.top + margin.bottom)
+
+.append("g")
+
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.json("data.json", function(error, data) {
+
+data.forEach(function(d) {
+
+d.date = parseDate(d.date);
+
+d.close = +d.close;
+
+});
+
+x.domain(d3.extent(data, function(d) { return d.date; }));
+
+y.domain(d3.extent(data, function(d) { return d.close; }));
+
+svg.append("g")
+
+.attr("class", "x axis")
+
+.attr("transform", "translate(0," + height + ")")
+
+.call(xAxis);
+
+svg.append("g")
+
+.attr("class", "y axis")
+
+.call(yAxis)
+
+.append("text")
+
+.attr("transform", "rotate(-90)")
+
+.attr("y", 6)
+
+.attr("dy", ".71em")
+
+.style("text-anchor", "end")
+
+.text("Price ($)");
+
+svg.append("path")
+
+.datum(data)
+
+.attr("class", "line")
+
+.att</pre>line);
+
+});
+</script>
+{% endhighlight %}
+
+<p><a href="https://gist.github.com/jefrip/6017698/raw/196fae11bff5bb8ff4424ad22a936b126dd25ba5/data.json" title="data.json" target="_blank">data.json</a></p>
+<p>Hasilnya </p>
+<p><a href="/assets/linechart.png"><img src="/assets/linechart-300x157.png" alt="linechart" width="300" height="157" class="aligncenter size-medium wp-image-225" /></a></p>
+<p>beberapa troubleshooting yg pernah saya dapatkan adalah pada format date, php menghasilkan timestamp sedangkan d3.js menggunakan unix epoch (unix epoch = timestamp * 1000).</p>
+<p>Dilain kesempatan grafik akan dibuat lebih interaktif.</p>
+<p>See ya..</p>
