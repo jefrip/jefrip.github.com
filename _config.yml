@@ -3,7 +3,7 @@
 permalink: /:year/:month/:title 
 exclude: ["CNAME",".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: pygments
-markdown: rdiscount
+markdown: kramdown
 paginate: 5
 layout: "post"
 paginate_path: "/page/:num"
