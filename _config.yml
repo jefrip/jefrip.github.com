@@ -2,25 +2,24 @@
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:year/:month/:title 
 exclude: ["CNAME",".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: pygments
+highlighter: rouge
 markdown: kramdown
 paginate: 5
-layout: "post"
+page: "post"
 paginate_path: "/page/:num"
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : It's me Jefri
-tagline: Jefri's Blog
+title : "It's me Jefri"
+tagline: "Jefri's Blog"
 
-gems:
-  - jekyll-sitemap
+repository: "jefrip/jefrip.github.com"
 
 author :
-  name : Jefri Pakpahan
+  name : "Jefri Pakpahan"
 #  email : jefri.p@gmail.com
-  github : jefrip
-  twitter : jefriip
+  github : "jefrip"
+  twitter : "jefriip"
 #  feedburner : feedname
 
 lunr_search:
@@ -34,7 +33,7 @@ lunr_search:
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://jefri-p.com
+production_url : "http://jefri-p.com"
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
