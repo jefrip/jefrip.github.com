@@ -13,6 +13,7 @@ paginate_path: "/page/:num"
 title : "It's me Jefri"
 tagline: "Jefri's Blog"
 
+gems: ["jekyll-paginate","jekyll-sitemap","jekyll-github-metadata"]
 repository: "jefrip/jefrip.github.com"
 
 author :
