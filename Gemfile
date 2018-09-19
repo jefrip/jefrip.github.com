@@ -1,8 +1,8 @@
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 require 'json'
-require 'open-uri'
-versions = JSON.parse(open('https://pages.github.com/versions.json').read)
-gem 'wdm', '~> 0.1.0' if Gem.win_platform?
-gem "jekyll", "~> 3.1"
-gem 'github-pages', versions['github-pages']
+gem 'wdm', '~> 0.1.1' if Gem.win_platform?
+gem "jekyll", "~> 3.8.3"
+gem "jekyll-paginate"
+gem "jekyll-sitemap"
+gem "jekyll-github-metadata"
