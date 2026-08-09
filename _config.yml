@@ -1,5 +1,8 @@
 # Chirpy theme config — https://chirpy.cotes.page
-theme: jekyll-theme-chirpy
+# NOTE: Cloudflare Pages builds Jekyll via the github-pages gem, which does
+# not ship jekyll-theme-chirpy. remote_theme fetches it from GitHub at build
+# time (works on Cloudflare; jekyll-remote-theme is in github-pages whitelist).
+remote_theme: cotes2020/jekyll-theme-chirpy@v7.6.0
 lang: en
 timezone: Asia/Jakarta
 title: "It's me Jefri"
@@ -37,6 +40,7 @@ jekyll-archives:
     category: /categories/:name/
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-archives
