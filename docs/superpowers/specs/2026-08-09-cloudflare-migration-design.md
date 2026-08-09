@@ -21,7 +21,7 @@ existing content and URLs.
 - Local plugin `_plugins/debug.rb` (dev-only debug filter)
 - Disqus comments (shortname `jefri`) — **to be dropped**
 - Google Analytics UA-27115677-1 — **dead** (Universal Analytics retired 2023)
-- Lunr client-side search (`search.json` + jQuery) — **kept**, replaced by Chirpy search
+- Lunr client-side search (`search.json` + jQuery) — **functionality kept**, implementation replaced by Chirpy's built-in client-side search
 - Google site verification file `google1b89562a4ceeb854.html`
 - WordPress-import artifacts in post frontmatter (`!ruby/object:Hpricot::Doc`,
   `meta:`, `status: publish`, `type: post`, `_edit_last`, etc.)
