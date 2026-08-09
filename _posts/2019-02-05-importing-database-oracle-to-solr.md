@@ -3,7 +3,7 @@ layout: post
 title: Importing database (Oracle) to Solr
 date: 2019-02-05 10:10:15+07:00
 categories:
-- Solr
+- solr
 tags:
 - solr
 - oracle

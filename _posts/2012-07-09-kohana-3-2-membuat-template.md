@@ -3,8 +3,8 @@ layout: post
 title: 'Kohana 3.2 : Membuat Template'
 date: 2012-07-09 09:52:09+07:00
 categories:
-- Kohana
-- PHP
+- kohana
+- php
 tags:
 - kohana-3-2
 - templating
