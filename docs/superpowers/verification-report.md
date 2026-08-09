@@ -8,3 +8,5 @@
 - Pages project: `jefrip-blog` (jefrip-blog.pages.dev)
 - Build command: `jekyll build`, output `_site/`
 - Build command configured via API on 2026-08-09.
+
+<!-- deploy trigger 2026-08-09T16:11:21Z -->
