@@ -1,33 +1,13 @@
 ---
 layout: post
 title: 'Kohana 3.2 : Membuat Template'
-date: 2012-07-09 09:52:09.000000000 +07:00
+date: 2012-07-09 09:52:09+07:00
 categories:
 - Kohana
 - PHP
 tags:
 - kohana-3-2
 - templating
-status: publish
-type: post
-published: true
-meta:
-  _yoast_wpseo_metadesc: 'Kohana 3.2 : Membuat Template'
-  _yoast_wpseo_focuskw: Kohana 3.2
-  if_slider_image: http://www.jefri-p.com/wp-content/uploads/2012/04/logo-new.png
-  _yoast_wpseo_linkdex: '81'
-  _edit_last: '1'
-  _syntaxhighlighter_encoded: '1'
-  dsq_thread_id: '757393490'
-  _thumbnail_id: '141'
-author:
-  login: admin
-  email: jefri.p@gmail.com
-  display_name: Jefri
-  first_name: ''
-  last_name: ''
-excerpt: !ruby/object:Hpricot::Doc
-  options: {}
 ---
 <p>Dalam pembuatan sebuah website/sistem informasi template merupakan elemen penting dalam penyajian tampilan sebuah website, disini akan dijelaskan penggunaan template pada Kohana 3.2, agar pembuatan suatu website lebih efisien dan simpel.</p>
 <p>Melanjutkan Blog <a title="PHP Framework : Mengenal Framework Kohana 3" href="http://www.jefri-p.com/2012/04/php-framework-mengenal-framework-kohana-3/">sebelumnya</a>, defaultnya template kohana membuat controller turunan dari Controller_Template, namun jika kita membuat 1 template untuk semua kita harus menyertakan title, javascript, css dll yang membuat wasting code. Oleh karena itu dibutuhkan sebuah suatu controller template baru yang akan diturunkan ke controller kita yang mempunyai template yang sama.</p>

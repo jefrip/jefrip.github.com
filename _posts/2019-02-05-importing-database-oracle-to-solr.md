@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 'Importing database (Oracle) to Solr'
-date: 2019-02-05 10:10:15.000000000 +07:00
+title: Importing database (Oracle) to Solr
+date: 2019-02-05 10:10:15+07:00
 categories:
 - Solr
 tags:
@@ -9,11 +9,6 @@ tags:
 - oracle
 - java
 - import
-status: publish
-type: post
-published: true
-author: admin
-excerpt_separator: <!--more-->
 ---
 
 

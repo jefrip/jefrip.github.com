@@ -1,17 +1,12 @@
 ---
 layout: post
-title: 'Belajar Pandas'
-date: 2018-09-21 10:10:15.000000000 +07:00
+title: Belajar Pandas
+date: 2018-09-21 10:10:15+07:00
 categories:
 - python
 tags:
 - pandas
 - python
-status: publish
-type: post
-published: true
-author: admin
-excerpt_separator: <!--more-->
 ---
 
 
