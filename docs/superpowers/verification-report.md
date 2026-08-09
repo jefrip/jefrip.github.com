@@ -12,3 +12,5 @@
 <!-- deploy trigger 2026-08-09T16:11:21Z -->
 
 <!-- build retry with bundle exec 16:19:24Z -->
+
+<!-- test root_dir=_site 16:44:48Z -->
