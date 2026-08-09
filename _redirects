@@ -1,0 +1,9 @@
+/feed/  /feed.xml  301
+/feed/index.xml  /feed.xml  301
+/atom.xml  /feed.xml  301
+/rss.xml  /feed.xml  301
+/sitemap.txt  /sitemap.xml  301
+/search.html  /  301
+/tag/*  /tags/:splat  301
+/topik/general  /  301
+/topik/*  /categories/:splat  301

@@ -50,3 +50,7 @@ exclude:
   - scripts/
   - docs/
   - .ruby-version
+
+# Copy underscore-prefixed files to _site (Cloudflare Pages redirects)
+include:
+  - _redirects

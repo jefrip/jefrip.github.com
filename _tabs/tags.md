@@ -4,5 +4,5 @@ type: tags
 layout: tags
 icon: fas fa-tags
 order: 2
-permalink: /tabs/tags/
+permalink: /tags/
 ---
