@@ -1,0 +1,4 @@
+# Cloudflare Pages headers — force correct content-type for HTML
+# (Direct Upload doesn't always set text/html from extension)
+/*.html
+  Content-Type: text/html; charset=utf-8
