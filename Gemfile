@@ -1,11 +1,9 @@
+# Theme via the local gem (bundled at build time — no GitHub fetch needed,
+# which is reliable on Cloudflare Pages where remote_theme can fail).
 source "https://rubygems.org"
 
-# Minimal set that lets Cloudflare Pages (github-pages build) run Chirpy via
-# remote_theme. The theme gem itself is NOT listed — remote_theme fetches it
-# from GitHub at build time, so it must not be in the Gemfile (github-pages
-# whitelist rejects it otherwise and `bundle install` fails).
 gem "jekyll", "~> 4.3"
-gem "jekyll-remote-theme"
+gem "jekyll-theme-chirpy"
 gem "jekyll-seo-tag"
 gem "jekyll-sitemap"
 gem "jekyll-feed"
